@@ -1,2 +1,3 @@
 ﻿Ghi chú vào đây
 1 - Bắt đầu đồ án
+2 - http://nachos-544-operating-systems.googlecode.com/svn/trunk/
