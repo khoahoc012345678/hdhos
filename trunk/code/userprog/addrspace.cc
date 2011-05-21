@@ -70,7 +70,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
 		(WordToHost(noffH.noffMagic) == NOFFMAGIC))
     	SwapHeader(&noffH);
     ASSERT(noffH.noffMagic == NOFFMAGIC);
-
+    addrLock->Acquire();
 // how big is address space?
     size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
 			+ UserStackSize;	// we need to increase the size
@@ -89,7 +89,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
     pageTable = new TranslationEntry[numPages];
     for (i = 0; i < numPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virtual page # = phys page #
-	pageTable[i].physicalPage = i;
+	pageTable[i].physicalPage = bmTab->Find(); //NOTE
 	pageTable[i].valid = TRUE;
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
@@ -101,7 +101,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
 // zero out the entire address space, to zero the unitialized data segment 
 // and the stack segment
     bzero(machine->mainMemory, size);
-
+    addrLock->Release();
 // then, copy in the code and data segments into memory
     if (noffH.code.size > 0) {
         DEBUG('a', "Initializing code segment, at 0x%x, size %d\n", 
@@ -117,7 +117,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
     }
 
 }
-#define NEED_Value	10
+
 AddrSpace::AddrSpace(char * filename)
 {
 	NoffHeader noffH;
@@ -148,7 +148,7 @@ AddrSpace::AddrSpace(char * filename)
 	// Check the available memory enough to load new process
 	//debug
 	//debug
-	if (numPages > NEED_Value){//NOTE:số trang còn trống
+	if (numPages > bmTab->NumClear()){//NOTE:số trang còn trống
 		printf("\nAddrSpace:Load: not enough memory for new process..!");
 		numPages = 0;
 		delete executable;
@@ -159,7 +159,7 @@ AddrSpace::AddrSpace(char * filename)
 	pageTable = new TranslationEntry[numPages];
 	for (i = 0; i < numPages; i++) {
 		pageTable[i].virtualPage = i; // for now, virtual page # = phys page #
-		pageTable[i].physicalPage = NEED_Value;//NOTE:tìm 1 trang trống và đánh dấu đã sử dụng;
+		pageTable[i].physicalPage = bmTab->Find();//NOTE:tìm 1 trang trống và đánh dấu đã sử dụng;
 		pageTable[i].valid = TRUE;
 		pageTable[i].use = FALSE;
 		pageTable[i].dirty = FALSE;

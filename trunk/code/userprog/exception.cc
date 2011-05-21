@@ -96,25 +96,47 @@ ExceptionHandler(ExceptionType which)
 		case SyscallException:
 			switch(type)
 			{
+				//NOTE: Multi-Programming
 				case SC_Halt:
-					DEBUG('a',"\n Shutdown,initiated by user program.");
-					interrupt->Halt();
-					break;
-				case SC_Exit:
-				{
-					IncreasePC() ;
-					break;
-				}
+					doSC_Halt();
+					break;				
 				case SC_Exec:
-				{
+					doSC_Exec();
 					IncreasePC() ;
 					break;
-				}
+				
 				case SC_Join:
-				{
+					doSC_Join();
 					IncreasePC() ;
 					break;
-				}
+				
+				case SC_Fork:
+					doSC_Fork();
+					IncreasePC() ;
+					break;
+				
+				case SC_Yield:
+					doSC_Yield();
+					IncreasePC() ;
+					break;
+				
+				case SC_Exit:
+					doSC_Exit();
+					IncreasePC() ;
+					break;
+				case SC_CreateLock:
+					doSC_CreateLock();
+					IncreasePC() ;
+					break;
+				case SC_Acquire:
+					doSC_Acquire();
+					IncreasePC() ;
+					break;
+				case SC_Release:
+					doSC_Release();
+					IncreasePC() ;
+					break;
+				//NOTE: I/O
 				case SC_Create:
 				{
 					doSC_Create();
@@ -144,17 +166,8 @@ ExceptionHandler(ExceptionType which)
 					IncreasePC() ;
 					break;
 				}
-				case SC_Fork:
-				{
-					IncreasePC() ;
-					break;
-				}
-				case SC_Yield:
-				{
-					IncreasePC() ;
-					break;
-				}
 				
+				//NOTE: Do an I
 				case SC_ReadInt:
 				{
 					char* buffer = new char [sizeof(int)];
@@ -179,8 +192,7 @@ ExceptionHandler(ExceptionType which)
 					delete buffer;
 					IncreasePC() ;
 					break;
-				}
-				
+				}				
 				case SC_ReadChar :
 				{
 					char* c = new char[2];
@@ -196,8 +208,7 @@ ExceptionHandler(ExceptionType which)
 					delete c;
 					IncreasePC() ;
 					break;
-				}
-				
+				}				
 				case SC_PrintChar:
 				{
 					int virtAddr = machine->ReadRegister(4); 

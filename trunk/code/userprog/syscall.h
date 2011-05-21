@@ -19,22 +19,28 @@
  * is being asked for
  */
 #define SC_Halt		0
-#define SC_Exit		1
-#define SC_Exec		2
-#define SC_Join		3
-#define SC_Create	4
-#define SC_Open		5
-#define SC_Read		6
-#define SC_Write	7
-#define SC_Close	8
-#define SC_Fork		9
-#define SC_Yield	10
-#define SC_ReadInt	11
-#define SC_PrintInt	12
-#define SC_ReadChar	13
-#define SC_PrintChar	14
-#define SC_ReadString	15
-#define SC_PrintString	16
+#define SC_Exec		1
+#define SC_Join		2
+#define SC_Fork		3
+#define SC_Yield	4
+#define SC_Exit		5
+#define SC_CreateLock	6
+#define SC_Acquire	7
+#define SC_Release	8
+
+
+#define SC_Create	9
+#define SC_Open		10
+#define SC_Read		11
+#define SC_Write	12
+#define SC_Close	13
+
+#define SC_ReadInt	14
+#define SC_PrintInt	15
+#define SC_ReadChar	16
+#define SC_PrintChar	17
+#define SC_ReadString	18
+#define SC_PrintString	19
 
 #ifndef IN_ASM
 
@@ -55,7 +61,7 @@ void Halt();
 /* Address space control operations: Exit, Exec, and Join */
 
 /* This user program is done (status = 0 means exited normally). */
-void Exit(int status);	
+void Exit(int exitCode);	
 
 /* A unique identifier for an executing user program (address space) */
 typedef int SpaceId;	
@@ -63,7 +69,7 @@ typedef int SpaceId;
 /* Run the executable, stored in the Nachos file "name", and return the 
  * address space identifier
  */
-SpaceId Exec(char *name);
+SpaceId Exec(char* name, int priority);
  
 /* Only return once the the user program "id" has finished.  
  * Return the exit status.
@@ -129,7 +135,17 @@ void Fork(void (*func)());
  * or not. 
  */
 void Yield();
+/* Create Lock
+ * 
+ */
+int CreateLock(char* name);
+int Acquire(char* name);
+int Release(char* name);
 
+
+/*Do an 1
+ * 
+ */
 int ReadInt ()	;
 void PrintInt(int number);
 char ReadChar();

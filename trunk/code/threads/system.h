@@ -16,8 +16,10 @@
 #include "stats.h"
 #include "timer.h"
 #include "synch.h"
-#include "synchcons.h"
 
+#include "synchcons.h"
+#include "./Item/ptable.h"
+#include "bitmap.h"
 // Initialization and cleanup routines
 extern void Initialize(int argc, char **argv); 	// Initialization,
 						// called before anything else
@@ -32,11 +34,13 @@ extern Statistics *stats;			// performance metrics
 extern Timer *timer;				// the hardware alarm clock
 //NOTE: ADD
 extern SynchConsole *gSynchConsole;
-extern Lock *addrLock;
+extern Lock 	*addrLock;
+extern PTable	*processTab; 
+extern BitMap	*bmTab;
 //END
 #ifdef USER_PROGRAM
 #include "machine.h"
-extern Machine* machine;	// user program memory and registers
+extern Machine* machine;	// user program memory and registers	
 #endif
 
 #ifdef FILESYS_NEEDED 		// FILESYS or FILESYS_STUB 

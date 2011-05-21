@@ -18,10 +18,14 @@ Interrupt *interrupt;			// interrupt status
 Statistics *stats;			// performance metrics
 Timer *timer;				// the hardware timer device,
 // for invoking context switches
+
 //NOTE: ADD
 SynchConsole *gSynchConsole;
-Lock *addrLock;
+Lock	*addrLock;
+PTable	*processTab; 
+BitMap	*bmTab;
 //END
+
 #ifdef FILESYS_NEEDED
 FileSystem  *fileSystem;
 #endif
@@ -154,6 +158,8 @@ Initialize(int argc, char **argv)
 	machine = new Machine(debugUserProg);	// this must come first
 	gSynchConsole = new SynchConsole();	
 	addrLock = new Lock ("addrLock");
+	processTab = new PTable (10);
+	bmTab = new BitMap (512);
 	#endif
 	
 	#ifdef FILESYS
@@ -184,6 +190,8 @@ Cleanup()
 	#ifdef USER_PROGRAM
 	delete gSynchConsole;
 	delete addrLock;
+	delete processTab;
+	delete bmTab;
 	delete machine;
 	#endif
 	
