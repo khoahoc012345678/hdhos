@@ -2,7 +2,7 @@
 int main()
 {
 	int i;
-	for (i = 0; i<255; i++)
+	for (i = 0; i<254; i++)
 	{
 		PrintChar((char)i);
 	}

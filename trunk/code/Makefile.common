@@ -76,7 +76,16 @@ USERPROG_H = ../userprog/addrspace.h\
 	../machine/machine.h\
 	../machine/mipssim.h\
 	../machine/translate.h\
-	../threads/synchcons.h
+	../threads/synchcons.h\
+	../userprog/SCHandle.h\
+	../userprog/Item/pcb.h\
+	../userprog/Item/ptable.h\
+	../userprog/FileManagement/FDBase.h \
+	../userprog/FileManagement/FDIn.h \
+	../userprog/FileManagement/FDOut.h \
+	../userprog/FileManagement/FDRo.h \
+	../userprog/FileManagement/FDRw.h \
+	../userprog/FileManagement/FDTable.h \
 
 USERPROG_C = ../userprog/addrspace.cc\
 	../userprog/bitmap.cc\
@@ -86,10 +95,19 @@ USERPROG_C = ../userprog/addrspace.cc\
 	../machine/machine.cc\
 	../machine/mipssim.cc\
 	../machine/translate.cc\
-	../threads/synchcons.cc
+	../threads/synchcons.cc\
+	../userprog/SCHandle.cc\
+	../userprog/Item/pcb.cc\
+	../userprog/Item/ptable.cc\
+	../userprog/FileManagement/FDBase.cc \
+	../userprog/FileManagement/FDIn.cc \
+	../userprog/FileManagement/FDOut.cc \
+	../userprog/FileManagement/FDRo.cc \
+	../userprog/FileManagement/FDRw.cc \
+	../userprog/FileManagement/FDTable.cc \
 
 USERPROG_O = addrspace.o bitmap.o exception.o progtest.o console.o machine.o \
-	mipssim.o translate.o synchcons.o
+	mipssim.o translate.o synchcons.o SCHandle.o pcb.o ptable.o FDBase.o FDIn.o FDOut.o FDRo.o FDRw.o FDTable.o 
 
 VM_H = 
 VM_C = 

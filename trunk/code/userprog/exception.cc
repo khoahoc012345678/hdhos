@@ -23,18 +23,14 @@
 #ifndef SYSCHCONSOLE_H
 #define SYSCHCONSOLE_H
 #endif
+
 #include "copyright.h"
 #include "system.h"
 #include "syscall.h"
-
+#include "SCHandle.h"
 
 #define MaxFileLength 320
 #define MAX 2222
-
-char* User2System(int virtAddr,int limit);
-int System2User (int virtAddr, int len, char* buff);
-void IncreaseProgramCounter();  
-
 
 //----------------------------------------------------------------------
 // ExceptionHandler
@@ -62,256 +58,201 @@ void IncreaseProgramCounter();
 void
 ExceptionHandler(ExceptionType which)
 {
-    int type = machine->ReadRegister(2);
-switch (which)
-{
-	case NoException:
-		return ;
-	case PageFaultException: 
-		break;
-	case ReadOnlyException: 
-		break;
-	case BusErrorException: 
-		break;
-	case AddressErrorException: 
-		break;
-	case OverflowException: 
-		break;
-	case IllegalInstrException: 
-		break;
-	case NumExceptionTypes: 
-		break;
-	case SyscallException:
-		switch(type)
-		{
-			case SC_Halt:
-				DEBUG('a',"\n Shutdown,initiated by user program.");
-				interrupt->Halt();
-				break;
-			
-			 case SC_Create:
-			    { 
-				int virtAddr; 
-				char* filename; 
-				 
-				DEBUG('a',"\n SC_Create call ..."); 
-				DEBUG('a',"\n Reading virtual address of filename"); 
-				virtAddr = machine->ReadRegister(4); 
-				DEBUG ('a',"\n Reading filename."); 
-				filename = User2System(virtAddr,MaxFileLength+1);  
-				if (filename == NULL) 
-				{ 				  
-				     DEBUG('a',"\n Not enough memory in system"); 
-				     machine->WriteRegister(2,-1);
-				     delete filename; 
-				     return; 
-				} 
-				DEBUG('a',"\n Finish reading filename."); 
-				if (!fileSystem->Create(filename,0)) 
-				{ 
-				     machine->WriteRegister(2,-1); 
-				     delete filename; 
-				     return; 
-				} 
-				machine->WriteRegister(2,0); 
-				delete filename; 
-				return; 
-			} 
-			case SC_ReadInt:
+	int type = machine->ReadRegister(2);
+	switch (which)
+	{
+		case NoException:
+			printf("NoException");
+			IncreasePC() ;
+			return ;
+		case PageFaultException: 
+			printf("PageFaultException");
+			IncreasePC() ;
+			break;
+		case ReadOnlyException: 
+			printf("ReadOnlyException");
+			IncreasePC() ;
+			break;
+		case BusErrorException: 
+			printf("BusErrorException");
+			IncreasePC() ;
+			break;
+		case AddressErrorException: 
+			printf("AddressErrorException");
+			IncreasePC() ;
+			break;
+		case OverflowException: 
+			printf("OverflowException");
+			IncreasePC() ;
+			break;
+		case IllegalInstrException: 
+			printf("IllegalInstrException");
+			IncreasePC() ;
+			break;
+		case NumExceptionTypes: 
+			printf("NumExceptionTypes");
+			IncreasePC() ;
+			break;
+		case SyscallException:
+			switch(type)
 			{
-				char* buffer = new char [MAX];
-;				int kq = 0,MuMuoi = 1;
-				int key = MySynchConsole -> Read(buffer,MAX);
-				//kt du lieu
-				if (key==-1)
+				case SC_Halt:
+					DEBUG('a',"\n Shutdown,initiated by user program.");
+					interrupt->Halt();
 					break;
-				else
-					for (int i=key-1;i>=0;i--)
-					{
-						if ((buffer[i]<'0') | (buffer[i]>'9') )
-						{
-							MySynchConsole->Write("error: Sai Kieu!!!",18);
-							machine->WriteRegister(2,0); 
-							break;
-						}
-						//chuyen tu char* -> int
-						for (int j=0; j<key-i-1; j++)
-						{
-							MuMuoi=MuMuoi*10;
-						}
-						kq=kq+((int)buffer[i] - 48)*MuMuoi;
-						MuMuoi = 1;
-					
-					}
-				
-				machine->WriteRegister(2,kq); //
-				delete buffer;
-				break; 
-			}
-			case SC_PrintInt :
-			{
-				int virtAddr = machine->ReadRegister(4); 
-				char* buffer = new char [MAX];
-				//chuyen tu int -> char*
-				int len = 0;
-				while (virtAddr != 0)
+				case SC_Exit:
 				{
-					buffer[len] = (char) (virtAddr%10 + 48);
-					virtAddr=virtAddr/10;
-					len++;
-				}
-				//dao nguoc chuoi
-				char c;
-				for (int i=0; i<len/2; i++)
-				{
-					c = buffer[i];
-					buffer[i]=buffer[len-i-1];
-					buffer[len-i-1]=c;
-						
-				}
-				MySynchConsole->Write("\n\tSo Nhan Duoc:\t",16);
-				MySynchConsole->Write(buffer, len);
-				MySynchConsole->Write("\n", 1);
-				delete buffer;
-				break;
-			}
-			
-			case SC_ReadChar :
-			{
-				char* c = new char[2];
-				int key = MySynchConsole -> Read(c,1);
-				if (key==-1)
-				{
+					IncreasePC() ;
 					break;
 				}
-				else
+				case SC_Exec:
 				{
-					machine->WriteRegister(2,(int)c[0]); //
+					IncreasePC() ;
+					break;
 				}
-				delete c;
-				break;
-			}
-				
-			case SC_PrintChar:
-			{
-				int virtAddr = machine->ReadRegister(4); 
-				char *buffer = new char[2];
-				buffer [0] = (char) virtAddr;
-				MySynchConsole->Write("\n\tKy tu Nhan Duoc:\t",20);
-				MySynchConsole->Write(buffer, 1);
-				MySynchConsole->Write("\n", 1);
-				delete buffer;
-				break;
-			
-			}
-			case SC_ReadString:
-			{
-				int virtAddr = machine->ReadRegister(4); 
-				int length = machine->ReadRegister(5); 
-				char *buffer = new char [MAX];
-				int nByte;
-				while (1)
+				case SC_Join:
 				{
-					nByte = MySynchConsole->Read(buffer, MAX);
-					if (nByte > length)
+					IncreasePC() ;
+					break;
+				}
+				case SC_Create:
+				{
+					doSC_Create();
+					IncreasePC() ;
+					break;
+				}
+				case SC_Open:
+				{
+					IncreasePC() ;
+					break;
+				}
+				case SC_Read:
+				{
+					doSC_Read();
+					IncreasePC() ;
+					break;
+				}
+				case SC_Write:
+				{
+					doSC_Write();
+					IncreasePC() ;
+					break;
+				}
+				case SC_Close:
+				{
+					doSC_Close();
+					IncreasePC() ;
+					break;
+				}
+				case SC_Fork:
+				{
+					IncreasePC() ;
+					break;
+				}
+				case SC_Yield:
+				{
+					IncreasePC() ;
+					break;
+				}
+				
+				case SC_ReadInt:
+				{
+					char* buffer = new char [sizeof(int)];
+					;				int value = 0;
+					int key = gSynchConsole -> Read(buffer, sizeof(int));
+					//kt du lieu
+					if (key==-1)
+						break;
+					else
+						value = atoi(buffer);		
+					machine->WriteRegister(2,value);
+					delete buffer;
+					IncreasePC() ;
+					break; 
+				}
+				case SC_PrintInt :
+				{
+					int value = machine->ReadRegister(4); 
+					char* buffer = new char [ sizeof(int)];
+					sprintf(buffer,"%d",value);
+					gSynchConsole->Write(buffer, strlen(buffer));
+					delete buffer;
+					IncreasePC() ;
+					break;
+				}
+				
+				case SC_ReadChar :
+				{
+					char* c = new char[2];
+					int key = gSynchConsole -> Read(c,1);
+					if (key==-1)
 					{
-						MySynchConsole->Write("Vuot Qua Do Dai Cho Phep.!!",27);
-						nByte = length;
 						break;
 					}
+					else
+					{
+						machine->WriteRegister(2,(int)c[0]); //
+					}
+					delete c;
+					IncreasePC() ;
 					break;
 				}
-				int Number_of_bytes_copied = System2User(virtAddr,nByte,buffer) ;
-				if (Number_of_bytes_copied==nByte)
-					MySynchConsole->Write("copy complete!!",15);
-				else
-					MySynchConsole->Write("thieu du lieu",14);
-				delete buffer;
-				break;
-			}
-			case SC_PrintString:
-			{
-				int virtAddr = machine->ReadRegister(4);
-				char* buffer = new char[MAX];
-				buffer = User2System(virtAddr,MAX+1);  
-				int len = 0;
-				while(buffer[len++] != '\0');
-			
-				if (buffer == NULL) 
-				{ 
-				     printf("\n Not enough memory in system"); 
-				     machine->WriteRegister(2,-1);
-				     delete buffer; 
-				     return; 
-				} 
-				MySynchConsole->Write("\n\tChuoi Nhan Duoc:\n",19);
-				MySynchConsole->Write(buffer, len);
-				MySynchConsole->Write("\n", 1);
-				break;
-			}				
-			default:
-			{
-				printf("\nLoi default: Unexpected user mode exception (%d %d)",which,type);
-				ASSERT(FALSE);
-				interrupt->Halt();
+				
+				case SC_PrintChar:
+				{
+					int virtAddr = machine->ReadRegister(4); 
+					char *buffer = new char[2];
+					buffer [0] = (char) virtAddr;
+					gSynchConsole->Write(buffer, 1);
+					delete buffer;
+					IncreasePC() ;
+					break;			
+				}
+				case SC_ReadString:
+				{
+					int virtAddr = machine->ReadRegister(4); 
+					int length = machine->ReadRegister(5); 
+					char *buffer = new char [MAX];
+					int nByte;
+					while (1)
+					{
+						nByte = gSynchConsole->Read(buffer, MAX);
+						if (nByte > length)
+						{
+							gSynchConsole->Write("Vuot Qua Do Dai Cho Phep.!!",27);
+							nByte = length;
+							break;
+						}
+						break;
+					}
+					System2User(virtAddr,nByte,buffer) ;
+					delete buffer;
+					IncreasePC() ;
+					break;
+				}
+				case SC_PrintString:
+				{
+					int virtAddr = machine->ReadRegister(4);
+					char* buffer = new char[MAX];
+					buffer = User2System(virtAddr,MAX+1);  
+					int len = 0;
+					while(buffer[len++] != '\0');
+					
+					if (buffer == NULL) 
+					{ 
+						printf("\n Not enough memory in system"); 
+						machine->WriteRegister(2,-1);
+						delete buffer; 
+						return; 
+					} 
+					gSynchConsole->Write(buffer, len);
+					IncreasePC() ;
+					break;
+				}
+				
 				
 			}
-		}
-		IncreaseProgramCounter() ;
-		break;
+		
 	}
 }
-// Input: - User space address (int) 
-//  - Limit of buffer (int) 
-// Output:- Buffer (char*) 
-// Purpose: Copy buffer from User memory space to System memory space 
-char* User2System(int virtAddr,int limit) 
-{ 
-     int i;// index 
-     int oneChar; 
-     char* kernelBuf = NULL; 
-     kernelBuf = new char[limit +1];//need for terminal string 
-     if (kernelBuf == NULL) 
-     return kernelBuf; 
-     memset(kernelBuf,0,limit+1); 
-     //printf("\n Filename u2s:"); 
-     for (i = 0 ; i < limit ;i++) 
-     { 
-          machine->ReadMem(virtAddr+i,1,&oneChar); 
-          kernelBuf[i] = (char)oneChar; 
-          //printf("%c",kernelBuf[i]); 
-          if (oneChar == 0) 
-      break; 
-     } 
-     return kernelBuf; 
-} 
 
-// Input: - User space address (int) 
-//       - Limit of buffer (int) 
-//       - Buffer (char[]) 
-// Output:- Number of bytes copied (int) 
-// Purpose: Copy buffer from System memory space to User  memory space 
-int   System2User(int virtAddr,int len,char* buffer) 
-{ 
-  if (len < 0) return -1; 
-     if (len == 0)return len; 
-     int i = 0; 
-     int oneChar = 0 ; 
-    do{ 
-     oneChar= (int) buffer[i]; 
-     machine->WriteMem(virtAddr+i,1,oneChar); 
-     i ++; 
-   }while(i < len && oneChar != 0); 
-  return i; 
-}
-
-void IncreaseProgramCounter() 
-{
-  int iPc;
-  iPc = machine->ReadRegister(PCReg);
-  machine->WriteRegister(PrevPCReg, iPc);
-  iPc = machine->ReadRegister(NextPCReg);
-  machine->WriteRegister(PCReg, iPc);
-  iPc += 4;
-  machine->WriteRegister(NextPCReg, iPc);
-}

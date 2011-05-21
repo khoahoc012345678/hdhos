@@ -13,7 +13,7 @@
 # if you are cross-compiling, you need to point to the right executables
 # and change the flags to ld and the build procedure for as
 
-GCCDIR = ../../../gnu-decstation-ultrix/decstation-ultrix/2.95.3/
+GCCDIR = ../../../bin/
 
 LDFLAGS = -T script -N
 ASFLAGS = -mips2
@@ -27,7 +27,7 @@ CPPFLAGS = $(INCDIR)
 
 PATH = $(GCCDIR):/lib:/usr/bin:/bin
 
-CC = $(GCCDIR)gcc -B../../../gnu-decstation-ultrix/
+CC = $(GCCDIR)gcc -B../../../bin/
 AS = $(GCCDIR)as
 LD = $(GCCDIR)ld
 

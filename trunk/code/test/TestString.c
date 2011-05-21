@@ -4,9 +4,11 @@
 
 int main()
 {
+	
 	char chuoinhap [60];
+	do{
 	ReadString(chuoinhap,60);
 	PrintString(chuoinhap);
-	Halt();	
+	} while (1);
 
 }

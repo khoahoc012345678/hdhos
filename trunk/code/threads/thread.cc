@@ -35,6 +35,7 @@
 Thread::Thread(char* threadName)
 {
     name = threadName;
+    processID = 0;
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;

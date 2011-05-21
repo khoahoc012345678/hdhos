@@ -61,7 +61,8 @@ enum ThreadStatus { JUST_CREATED, RUNNING, READY, BLOCKED };
 
 // external function, dummy routine whose sole job is to call Thread::Print
 extern void ThreadPrint(int arg);	 
-
+//Start kid process
+extern void NewStartProcess(int pid);
 // The following class defines a "thread control block" -- which
 // represents a single thread of execution.
 //
@@ -127,6 +128,7 @@ class Thread {
     void RestoreUserState();		// restore user-level register state
 
     AddrSpace *space;			// User code this thread is running.
+    int processID;
 #endif
 };
 

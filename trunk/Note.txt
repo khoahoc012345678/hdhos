@@ -1,4 +1,0 @@
-﻿Ghi chú vào đây
-1 - Bắt đầu đồ án
-2 - http://nachos-544-operating-systems.googlecode.com/svn/trunk/
-	http://www.user00.com/my2iu/waterloo/nachos.html
