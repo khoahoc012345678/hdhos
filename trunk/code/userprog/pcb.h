@@ -13,7 +13,12 @@ private:
 	int	numwait ;// số tiến trình đã join
 public:
 	int	parentID; //ID của tiến trình cha
+	
+	//NOTE
 	char 	*filename;//luu filename cua tien trinh ,phuc vu cho ham Fork
+	int priority;
+	//END
+	
 	PCB(int id);
 	~PCB();
 	int Exec(char *filename,int pid);// nạp chƣơng trình có tên lƣu trong biến filename và //processID sẽ là pid

@@ -155,6 +155,7 @@ AddrSpace::AddrSpace(char * filename)
 		addrLock->Release();
 		return ;
 	}
+	DEBUG('a', "Initializing address space, num pages %d, size %d\n",numPages, size);
 	// first, set up the translation
 	pageTable = new TranslationEntry[numPages];
 	for (i = 0; i < numPages; i++) {
@@ -187,10 +188,10 @@ AddrSpace::AddrSpace(char * filename)
 	}
 	// Copy the Code segment into memory
 	for (i = 0; i < numCodePage; i++) {
-		// if(noffH.code.size > 0)
-		executable->ReadAt(&(machine->mainMemory[noffH.code.virtualAddr]) +
-		pageTable[i].physicalPage*PageSize, i<(numCodePage-1)?PageSize:lastCodePageSize,
-				   noffH.code.inFileAddr + i*PageSize);
+		if(noffH.code.size > 0)
+			executable->ReadAt(&(machine->mainMemory[noffH.code.virtualAddr]) +
+			pageTable[i].physicalPage*PageSize, i<(numCodePage-1)?PageSize:lastCodePageSize,
+					   noffH.code.inFileAddr + i*PageSize);
 	}
 	//Check whether last page of code segment is full and copy the first part of
 	//initData segment into this page
@@ -223,7 +224,9 @@ AddrSpace::AddrSpace(char * filename)
 
 AddrSpace::~AddrSpace()
 {
-   delete pageTable;
+	for(int i = 0; i < numPages ; i++)
+		bmTab->Clear(pageTable[i].physicalPage);
+	delete pageTable;
 }
 
 //----------------------------------------------------------------------

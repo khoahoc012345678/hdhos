@@ -25,12 +25,12 @@ StartProcess(char *filename)
 {
 	OpenFile *executable = fileSystem->Open(filename);
 	AddrSpace *space;
-	
+	printf ("\n--> StartProcess!!!!!!!!!!!!!\n");
 	if (executable == NULL) {
 		printf("Unable to open file %s\n", filename);
 		return;
 	}
-	space = new AddrSpace(executable);    
+	space = new AddrSpace(filename);    
 	currentThread->space = space;
 	
 	delete executable;			// close file
@@ -47,11 +47,12 @@ StartProcess(char *filename)
 
 //NOTE:ADD
 void
-NewStartProcess(int pid)
+StartProcess(int pid)
 {
 	//NOTE:Tam dung sua sau
-	char* filename = "aaaaaaaaaaaaa";
+	char* filename = processTab->GetFileName(pid);
 	//END
+	printf ("\n--> NewStartProcess!!!!!!!!!!!!!\n");
 	AddrSpace *space;
 	//Kiem tra file co ton tai
 	OpenFile *executable = fileSystem->Open(filename);

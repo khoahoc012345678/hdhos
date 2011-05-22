@@ -2,5 +2,6 @@
  #include "copyright.h"
  int main()
  {
-	 Exec ("./test/TestString",1);
+	 int pid = Exec ("./test/help",1);
+	 Join(pid);
  }

@@ -58,21 +58,31 @@ int doSC_Halt()
  */
 int doSC_Exec()
 {
+	printf("\n\n--> Calling SC_Exec.");
 	int virtAddr = machine->ReadRegister(4);
 	char* filename = User2System(virtAddr,MaxFileLength+1);
+	int priority = machine->ReadRegister(5);
 	OpenFile *executable = fileSystem->Open(filename);
-	if (filename == NULL) 
+	if (executable == NULL) 
 	{ 				  
 		machine->WriteRegister(2,-1);
 		delete filename; 
 		return -1; 
 	} 
-	int pid = processTab->ExecUpdate(filename);
+	int pid = processTab->ExecUpdate(filename,priority);
 	machine->WriteRegister(2,pid);
+	printf("\n*****************End SC_Exec******************\n");
 	return 0;
 }
 int doSC_Join()
 {
+	printf("\n\n--> Calling SC_Join.");
+	int id = machine->ReadRegister(4);
+	
+	int ec = processTab->JoinUpdate(id);
+	
+	machine->WriteRegister(2,ec);
+	printf("\n*******************End SC_Join******************\n");
 	return 0;
 }
 int doSC_Fork()
@@ -85,6 +95,19 @@ int doSC_Yield()
 }
 int doSC_Exit()
 {
+	DEBUG('f', "\n\n--> Calling SC_Exit.");
+	printf("\n\n Calling SC_Exit.");
+	int exitStatus = machine->ReadRegister(4);
+	int pid = currentThread->processID; //pid la cua tien trinh can thoat
+	
+	// if process exited with error, print error
+	if (exitStatus != 0)
+		printf("\nProcess %s exited with error level %d",currentThread->getName(),exitStatus);
+	
+	processTab->ExitUpdate(exitStatus);
+	
+	currentThread->space->~AddrSpace();
+	currentThread->Finish();
 	return 0;
 }
 int doSC_CreateLock()
@@ -121,7 +144,7 @@ char* User2System(int virtAddr,int limit)
           kernelBuf[i] = (char)oneChar; 
           //printf("%c",kernelBuf[i]); 
           if (oneChar == 0) 
-      break; 
+		break; 
      } 
      return kernelBuf; 
 } 

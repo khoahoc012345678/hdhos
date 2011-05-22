@@ -257,6 +257,7 @@ ExceptionHandler(ExceptionType which)
 						return; 
 					} 
 					gSynchConsole->Write(buffer, len);
+					delete buffer;
 					IncreasePC() ;
 					break;
 				}

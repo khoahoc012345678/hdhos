@@ -14,12 +14,16 @@
  public:
 	 PTable(int size);
 	 ~PTable();	 
-	 int ExecUpdate(char* name);// return PID
+	 int ExecUpdate(char* name,int priority);// return PID
 	 int ExitUpdate(int ec);
 	 int JoinUpdate(int id);
 	 int GetFreeSlot();
 	 bool IsExist(int pid);
 	 void Remove(int pid);
+	 char* GetFileName(int pid) 
+	 {
+		 return pcb[pid]->filename;
+	}
  } ;
  #endif
  

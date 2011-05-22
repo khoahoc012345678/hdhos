@@ -4,17 +4,22 @@
   // Khởi tạo size đối tuong pcb để luu size process. Gán giá trị ban đầu là null. Nhớ khởi tạo *bm và *bmsem để sử dụng
  PTable::PTable(int size)
  {
+	printf ("\n--> Khoi tao ptable");
 	 bm = new BitMap (size);
 	 for (int i = 0; i<MAXPROCESS; i++)
 		 pcb[i] = NULL;
 	 psize = size;
 	 bmsem = new Semaphore ("bmsem", 1);
-	 ///
-	 ///
+	 bm->Mark(0);
+	 pcb[0] = new PCB(0);
+	 pcb[0]->filename = "./test/shell";
+	 pcb[0]->parentID = -1;
+	 printf ("\n--> End Khoi tao ptable");
  }
  // hủy các đối tuợng đã tạo
  PTable::~PTable()
  {
+	 printf ("\n--> Huy ptable");
 	 if( bm != NULL )
 		 delete bm;
 	 for( int i = 0; i < psize ; ++i){
@@ -22,7 +27,7 @@
 			 delete pcb[i];
 	 }			
 	 if( bmsem != NULL)
-		 delete bmsem;
+		 delete bmsem;	 
  }
  
  //Thực thi cho system call SC_EXEC, Kiểm tra chuong trình đuợc gọi có tồn tại
@@ -34,12 +39,20 @@
  // 	 pcb[ID]->Exec(…). Xem chi tiết mô tả lớp PCB ở bên duới.
  // 	 Phuong thức này đuợc gọi trong hàm xử ly system call SC_Exec
  
- int PTable::ExecUpdate(char* name)// return PID
+ int PTable::ExecUpdate(char* name,int _in_priority)// return PID
  {
+	 printf ("\n--> Bat dau ExecUpdate");
 	 bmsem->P();
 	 if(name == NULL)
 	 {
 		 printf("\nPTable-->Exec : Chuong trinh khong ton tai trong may");
+		 bmsem->V();
+		 return -1;
+	 }
+	 //Xuat thong bao loi neu Chuong trinh goi lai chinh no
+	 if( strcmp(name,"./test/shell") == 0 )
+	 {
+		 printf("\nPTable-->Exec :Chuong trinh goi lai chinh no");		
 		 bmsem->V();
 		 return -1;
 	 }
@@ -59,7 +72,14 @@
 	 pcb[ID] = new PCB(ID);
 	 pcb[ID]->filename = new char [strlen(name)]; //luu filename
 	 pcb[ID]->filename = name;
+	 pcb[ID]->priority =  _in_priority;		//gan do uu tien
+	 
 	 int pid = pcb[ID]->Exec(name,ID);
+	 //NOTE
+	 printf("\n*******************End ExecUpdate******************");
+	 printf("\ncurrentThread->name = %s",currentThread->getName());
+	 printf("\ncurrentThread->ID = %d",currentThread->processID);
+	 
 	 bmsem->V();
 	 return pid;
  }
@@ -79,6 +99,7 @@
  // 	 currentThread->Finish();
  int PTable::ExitUpdate(int ec)
  {
+	 printf ("\n--> Bat dau ExitUpdate");
 	 int id = currentThread->processID;
 	 if(id == 0)
 	 {
@@ -96,6 +117,7 @@
 	 pcb[id]->JoinRelease();
 	 pcb[id]->ExitWait();
 	 Remove(id);
+	 printf ("\n--> Ket Thuc ExitUpdate");
 	 return ec;
 	 
  }
@@ -108,6 +130,7 @@
  // 	 tiến trình khác không phải là cha của nó.
  int PTable::JoinUpdate(int id)
  {
+	 printf ("\n--> Bat dau JoinUpdate");
 	 if (id < 0)
 	 {
 		 printf("\nPTable-->JoinUpdate : PID %d khong ton tai ",id);
@@ -123,6 +146,7 @@
 	 
 	 int ec = pcb[id]->GetExitCode();
 	 pcb[id]->ExitRelease();
+	 printf ("\n--> Ket thuc JoinUpdate");
 	 return ec;
  }
  
