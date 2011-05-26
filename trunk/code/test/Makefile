@@ -35,7 +35,7 @@ CPP = gcc -E
 INCDIR =-I../userprog -I../threads
 CFLAGS = -G 0 -c $(INCDIR)
 
-all: halt shell matmult testMulti sort createfile ReadInt PrintInt TestInt TestChar TestString ASCII help
+all: halt shell matmult testMulti createfile TestString ASCII help
 
 start.o: start.s ../userprog/syscall.h
 	$(CPP) $(CPPFLAGS) start.c > strt.s
@@ -54,12 +54,6 @@ shell: shell.o start.o
 	$(LD) $(LDFLAGS) start.o shell.o -o shell.coff
 	../bin/coff2noff shell.coff shell
 
-sort.o: sort.c
-	$(CC) $(CFLAGS) -c sort.c
-sort: sort.o start.o
-	$(LD) $(LDFLAGS) start.o sort.o -o sort.coff
-	../bin/coff2noff sort.coff sort
-
 matmult.o: matmult.c
 	$(CC) $(CFLAGS) -c matmult.c
 matmult: matmult.o start.o
@@ -77,31 +71,6 @@ createfile.o: createfile.c
 createfile: createfile.o start.o
 	$(LD) $(LDFLAGS) start.o createfile.o -o createfile.coff
 	../bin/coff2noff createfile.coff createfile
-	
-ReadInt.o: ReadInt.c
-	$(CC) $(CFLAGS) -c ReadInt.c
-ReadInt: ReadInt.o start.o
-	$(LD) $(LDFLAGS) start.o ReadInt.o -o ReadInt.coff
-	../bin/coff2noff ReadInt.coff ReadInt
-
-PrintInt.o: PrintInt.c
-	$(CC) $(CFLAGS) -c PrintInt.c
-PrintInt: PrintInt.o start.o
-	$(LD) $(LDFLAGS) start.o PrintInt.o -o PrintInt.coff
-	../bin/coff2noff PrintInt.coff PrintInt
-
-	
-TestInt.o: TestInt.c
-	$(CC) $(CFLAGS) -c TestInt.c
-TestInt: TestInt.o start.o
-	$(LD) $(LDFLAGS) start.o TestInt.o -o TestInt.coff
-	../bin/coff2noff TestInt.coff TestInt
-
-TestChar.o: TestChar.c
-	$(CC) $(CFLAGS) -c TestChar.c
-TestChar: TestChar.o start.o
-	$(LD) $(LDFLAGS) start.o TestChar.o -o TestChar.coff
-	../bin/coff2noff TestChar.coff TestChar
 	
 TestString.o: TestString.c
 	$(CC) $(CFLAGS) -c TestString.c

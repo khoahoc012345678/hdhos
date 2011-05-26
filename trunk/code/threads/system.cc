@@ -188,11 +188,12 @@ Cleanup()
 	#endif
 	
 	#ifdef USER_PROGRAM
+	delete machine;
 	delete gSynchConsole;
 	delete addrLock;
 	delete processTab;
-	delete bmTab;
-	delete machine;
+	
+	
 	#endif
 	
 	#ifdef FILESYS_NEEDED
@@ -206,7 +207,7 @@ Cleanup()
 	delete timer;
 	delete scheduler;
 	delete interrupt;
-	
+	delete bmTab;
 	Exit(0);
 }
 

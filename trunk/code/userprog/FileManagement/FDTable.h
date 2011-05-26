@@ -12,9 +12,9 @@ private:
 	BitMap bm;
 	FDBase *fTable[MAXFILE];
 public:
-	FDTable();
+	FDTable();	
 	~FDTable();
-
+	
 	int FindFreeSlot();	
 	bool IsExistID(int id);
 

@@ -168,57 +168,6 @@ ExceptionHandler(ExceptionType which)
 				}
 				
 				//NOTE: Do an I
-				case SC_ReadInt:
-				{
-					char* buffer = new char [sizeof(int)];
-					;				int value = 0;
-					int key = gSynchConsole -> Read(buffer, sizeof(int));
-					//kt du lieu
-					if (key==-1)
-						break;
-					else
-						value = atoi(buffer);		
-					machine->WriteRegister(2,value);
-					delete buffer;
-					IncreasePC() ;
-					break; 
-				}
-				case SC_PrintInt :
-				{
-					int value = machine->ReadRegister(4); 
-					char* buffer = new char [ sizeof(int)];
-					sprintf(buffer,"%d",value);
-					gSynchConsole->Write(buffer, strlen(buffer));
-					delete buffer;
-					IncreasePC() ;
-					break;
-				}				
-				case SC_ReadChar :
-				{
-					char* c = new char[2];
-					int key = gSynchConsole -> Read(c,1);
-					if (key==-1)
-					{
-						break;
-					}
-					else
-					{
-						machine->WriteRegister(2,(int)c[0]); //
-					}
-					delete c;
-					IncreasePC() ;
-					break;
-				}				
-				case SC_PrintChar:
-				{
-					int virtAddr = machine->ReadRegister(4); 
-					char *buffer = new char[2];
-					buffer [0] = (char) virtAddr;
-					gSynchConsole->Write(buffer, 1);
-					delete buffer;
-					IncreasePC() ;
-					break;			
-				}
 				case SC_ReadString:
 				{
 					int virtAddr = machine->ReadRegister(4); 
@@ -238,6 +187,7 @@ ExceptionHandler(ExceptionType which)
 					}
 					System2User(virtAddr,nByte,buffer) ;
 					delete buffer;
+					//machine->WriteRegister(2,0);					
 					IncreasePC() ;
 					break;
 				}
@@ -258,6 +208,7 @@ ExceptionHandler(ExceptionType which)
 					} 
 					gSynchConsole->Write(buffer, len);
 					delete buffer;
+					machine->WriteRegister(2,0);					
 					IncreasePC() ;
 					break;
 				}

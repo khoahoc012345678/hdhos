@@ -36,11 +36,13 @@ Thread::Thread(char* threadName)
 {
     name = threadName;
     processID = 0;
+    exitStatus = 0;
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
 #ifdef USER_PROGRAM
-    space = NULL;
+    space = NULL;  
+   // fTab = new FDTable(10);
 #endif
 }
 

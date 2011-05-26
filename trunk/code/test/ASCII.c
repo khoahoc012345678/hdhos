@@ -4,7 +4,7 @@ int main()
 	int i;
 	for (i = 0; i<254; i++)
 	{
-		PrintChar((char)i);
+		PrintString((char)i);
 	}
 	Exit(1);
 }

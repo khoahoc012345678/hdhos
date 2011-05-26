@@ -1,6 +1,5 @@
 #include "pcb.h"
 #include "system.h"
-
 PCB::PCB(int id)
 {
 	printf ("\n--> Khoi tao PCB[%d]",id);
@@ -30,7 +29,10 @@ PCB::~PCB()
 		delete mutex;
 	}	
 	if (thread!=NULL){
-		thread->space->~AddrSpace();
+		thread->FreeSpace();
+		if(pid == 0){//exit main process
+ 		interrupt->Halt();
+		}
 		thread->Finish();	
 	}
 	printf ("\n--> End Huy PCB");
@@ -65,16 +67,15 @@ void PCB::JoinWait()
 	joinsem->P();
 }
 
-void PCB::ExitWait()
-{
-	exitsem->P();
-}
-
 void PCB::JoinRelease()
 {
 	joinsem->V();
 }
 
+void PCB::ExitWait()
+{
+	exitsem->P();
+}
 void PCB::ExitRelease()
 {
 	exitsem->V();
@@ -83,7 +84,7 @@ void PCB::ExitRelease()
 void PCB::IncNumWait()
 {
 	mutex->P();
-	numwait++;
+	numwait = numwait + 1;
 	mutex->V();
 }
 
@@ -91,6 +92,6 @@ void PCB::DecNumWait()
 {
 	mutex->P();
 	if (numwait > 0)
-		numwait--;
+		numwait = numwait - 1;
 	mutex->V();
 }

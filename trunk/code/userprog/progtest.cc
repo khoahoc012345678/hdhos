@@ -49,7 +49,7 @@ StartProcess(char *filename)
 void
 StartProcess(int pid)
 {
-	//NOTE:Tam dung sua sau
+	//NOTE:
 	char* filename = processTab->GetFileName(pid);
 	//END
 	printf ("\n--> NewStartProcess!!!!!!!!!!!!!\n");

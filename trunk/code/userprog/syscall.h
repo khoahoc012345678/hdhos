@@ -35,10 +35,6 @@
 #define SC_Write	12
 #define SC_Close	13
 
-#define SC_ReadInt	14
-#define SC_PrintInt	15
-#define SC_ReadChar	16
-#define SC_PrintChar	17
 #define SC_ReadString	18
 #define SC_PrintString	19
 
