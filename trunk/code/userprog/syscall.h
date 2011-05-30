@@ -19,25 +19,21 @@
  * is being asked for
  */
 #define SC_Halt		0
-#define SC_Exec		1
-#define SC_Join		2
-#define SC_Fork		3
-#define SC_Yield	4
-#define SC_Exit		5
-#define SC_CreateLock	6
-#define SC_Acquire	7
-#define SC_Release	8
-
-
-#define SC_Create	9
-#define SC_Open		10
-#define SC_Read		11
-#define SC_Write	12
-#define SC_Close	13
-
-#define SC_ReadString	18
-#define SC_PrintString	19
-
+#define SC_Exit		1
+#define SC_Exec		2
+#define SC_Join		3
+#define SC_Create	4
+#define SC_Open		5
+#define SC_Read		6
+#define SC_Write	7
+#define SC_Close	8
+#define SC_Fork		9
+#define SC_Yield	10
+#define SC_CreateLock	11
+#define SC_Acquire	12
+#define SC_Release	13
+#define SC_CreateFile	14
+#define SC_Seek		15
 #ifndef IN_ASM
 
 /* The system call interface.  These are the operations the Nachos
@@ -95,7 +91,7 @@ typedef int OpenFileId;
 #define ConsoleOutput	1  
  
 /* Create a Nachos file, with "name" */
-int Create(char *name);
+void Create(char *name);
 
 /* Open the Nachos file "name", and return an "OpenFileId" that can 
  * be used to read and write to the file.
@@ -130,26 +126,12 @@ void Fork(void (*func)());
 /* Yield the CPU to another runnable thread, whether in this address space 
  * or not. 
  */
-void Yield();
-/* Create Lock
- * 
- */
+void Yield();		
+
 int CreateLock(char* name);
 int Acquire(char* name);
 int Release(char* name);
 
-
-/*Do an 1
- * 
- */
-int ReadInt ()	;
-void PrintInt(int number);
-char ReadChar();
-void PrintChar(char character);	
-
-void ReadString (char* buffer, int length);
-void PrintString (char* buffer);
-void sort(int n);
 #endif /* IN_ASM */
 
 #endif /* SYSCALL_H */

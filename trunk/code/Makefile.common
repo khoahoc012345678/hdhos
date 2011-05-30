@@ -48,7 +48,7 @@ THREAD_H =../threads/copyright.h\
 	../machine/sysdep.h\
 	../machine/stats.h\
 	../machine/timer.h
-	
+
 THREAD_C =../threads/main.cc\
 	../threads/list.cc\
 	../threads/scheduler.cc\
@@ -77,15 +77,16 @@ USERPROG_H = ../userprog/addrspace.h\
 	../machine/mipssim.h\
 	../machine/translate.h\
 	../threads/synchcons.h\
-	../userprog/SCHandle.h\
-	../userprog/FileManagement/FDBase.h \
-	../userprog/FileManagement/FDIn.h \
-	../userprog/FileManagement/FDOut.h \
-	../userprog/FileManagement/FDRo.h \
-	../userprog/FileManagement/FDRw.h \
-	../userprog/FileManagement/FDTable.h \
+	../userprog/FDBase.h \
+	../userprog/FDIn.h \
+	../userprog/FDOut.h \
+	../userprog/FDRo.h \
+	../userprog/FDRw.h \
+	../userprog/FDTable.h \
 	../userprog/pcb.h\
-	../userprog/ptable.h
+	../userprog/ptable.h\
+	../userprog/Lock.h\
+	../userprog/SCHandle.h
 
 USERPROG_C = ../userprog/addrspace.cc\
 	../userprog/bitmap.cc\
@@ -96,18 +97,19 @@ USERPROG_C = ../userprog/addrspace.cc\
 	../machine/mipssim.cc\
 	../machine/translate.cc\
 	../threads/synchcons.cc\
-	../userprog/SCHandle.cc\
-	../userprog/FileManagement/FDBase.cc \
-	../userprog/FileManagement/FDIn.cc \
-	../userprog/FileManagement/FDOut.cc \
-	../userprog/FileManagement/FDRo.cc \
-	../userprog/FileManagement/FDRw.cc \
-	../userprog/FileManagement/FDTable.cc \
+	../userprog/FDBase.cc \
+	../userprog/FDIn.cc \
+	../userprog/FDOut.cc \
+	../userprog/FDRo.cc \
+	../userprog/FDRw.cc \
+	../userprog/FDTable.cc \
 	../userprog/pcb.cc\
-	../userprog/ptable.cc
+	../userprog/ptable.cc\
+	../userprog/Lock.cc\
+	../userprog/SCHandle.cc 
 
 USERPROG_O = addrspace.o bitmap.o exception.o progtest.o console.o machine.o \
-	mipssim.o translate.o synchcons.o SCHandle.o FDBase.o FDIn.o FDOut.o FDRo.o FDRw.o FDTable.o  pcb.o ptable.o
+	mipssim.o translate.o synchcons.o FDBase.o FDIn.o FDOut.o FDRo.o FDRw.o FDTable.o pcb.o ptable.o Lock.o SCHandle.o 
 
 VM_H = 
 VM_C = 

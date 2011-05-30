@@ -43,18 +43,19 @@ main.o: ../threads/main.cc ../threads/copyright.h ../threads/utility.h \
  /usr/include/xlocale.h ../threads/system.h ../threads/thread.h \
  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
- ../machine/timer.h ../threads/synch.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h \
- ../filesys/openfile.h ../userprog/pcb.h ../threads/thread.h \
- ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
- /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/scheduler.h \
+ ../threads/list.h ../machine/interrupt.h ../threads/list.h \
+ ../machine/stats.h ../machine/timer.h ../threads/synchcons.h \
+ ../machine/console.h ../threads/synch.h ../userprog/ptable.h \
+ ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
+ /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/Lock.h ../userprog/bitmap.h
 list.o: ../threads/list.cc ../threads/copyright.h ../threads/list.h \
  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
@@ -80,17 +81,18 @@ scheduler.o: ../threads/scheduler.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/system.h ../machine/interrupt.h ../threads/list.h \
- ../machine/stats.h ../machine/timer.h ../threads/synch.h \
- ../threads/synchcons.h ../machine/console.h ../userprog/ptable.h \
- ../userprog/bitmap.h ../filesys/openfile.h ../userprog/pcb.h \
- ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
- /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/time.h \
- /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/semaphore.h ../userprog/bitmap.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/system.h ../machine/interrupt.h \
+ ../threads/list.h ../machine/stats.h ../machine/timer.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h ../userprog/pcb.h ../threads/thread.h \
+ ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
+ ../userprog/Lock.h ../userprog/bitmap.h
 synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
  ../threads/thread.h ../threads/utility.h ../threads/bool.h \
  ../machine/sysdep.h ../threads/copyright.h /usr/include/stdio.h \
@@ -104,18 +106,19 @@ synch.o: ../threads/synch.cc ../threads/copyright.h ../threads/synch.h \
  /usr/include/bits/sys_errlist.h /usr/include/string.h \
  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
- ../filesys/filesys.h ../filesys/openfile.h ../threads/list.h \
- ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synchcons.h ../machine/console.h ../userprog/ptable.h \
- ../userprog/bitmap.h ../filesys/openfile.h ../userprog/pcb.h \
- ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
- /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/time.h \
- /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/semaphore.h ../userprog/bitmap.h
+ ../filesys/filesys.h ../filesys/openfile.h ../userprog/FDTable.h \
+ ../userprog/bitmap.h ../filesys/openfile.h ../userprog/FDBase.h \
+ ../threads/list.h ../threads/system.h ../threads/scheduler.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../userprog/ptable.h ../userprog/pcb.h ../threads/thread.h \
+ ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
+ ../userprog/Lock.h ../userprog/bitmap.h
 synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
  ../threads/synchlist.h ../threads/list.h ../threads/utility.h \
  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
@@ -130,7 +133,8 @@ synchlist.o: ../threads/synchlist.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h
 system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
@@ -144,18 +148,18 @@ system.o: ../threads/system.cc ../threads/copyright.h ../threads/system.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h
 thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/thread.h \
  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
@@ -168,19 +172,20 @@ thread.o: ../threads/thread.cc ../threads/copyright.h ../threads/thread.h \
  /usr/include/bits/sys_errlist.h /usr/include/string.h \
  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
- ../filesys/filesys.h ../filesys/openfile.h ../threads/switch.h \
- ../threads/synch.h ../threads/list.h ../threads/system.h \
- ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h \
- ../machine/stats.h ../machine/timer.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h \
- ../filesys/openfile.h ../userprog/pcb.h ../threads/thread.h \
- ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
- /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ ../filesys/filesys.h ../filesys/openfile.h ../userprog/FDTable.h \
+ ../userprog/bitmap.h ../filesys/openfile.h ../userprog/FDBase.h \
+ ../threads/switch.h ../threads/synch.h ../threads/list.h \
+ ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+ ../threads/list.h ../machine/stats.h ../machine/timer.h \
+ ../threads/synchcons.h ../machine/console.h ../userprog/ptable.h \
+ ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
+ /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/Lock.h ../userprog/bitmap.h
 utility.o: ../threads/utility.cc ../threads/copyright.h \
  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
  ../threads/copyright.h /usr/include/stdio.h /usr/include/features.h \
@@ -206,18 +211,18 @@ threadtest.o: ../threads/threadtest.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h
 interrupt.o: ../machine/interrupt.cc ../threads/copyright.h \
  ../machine/interrupt.h ../threads/list.h ../threads/copyright.h \
  ../threads/utility.h ../threads/bool.h ../machine/sysdep.h \
@@ -232,18 +237,18 @@ interrupt.o: ../machine/interrupt.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/system.h ../threads/thread.h \
  ../machine/machine.h ../threads/utility.h ../machine/translate.h \
  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
- ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/scheduler.h \
+ ../threads/list.h ../machine/interrupt.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h
 sysdep.o: ../machine/sysdep.cc ../threads/copyright.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
@@ -285,12 +290,13 @@ sysdep.o: ../machine/sysdep.cc ../threads/copyright.h \
  ../threads/system.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../machine/stats.h ../machine/timer.h ../threads/synch.h \
- ../threads/synchcons.h ../machine/console.h ../userprog/ptable.h \
- ../userprog/bitmap.h ../filesys/openfile.h ../userprog/pcb.h \
- ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
- /usr/include/bits/semaphore.h ../userprog/bitmap.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../machine/stats.h ../machine/timer.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h ../userprog/pcb.h ../threads/thread.h \
+ ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h
 stats.o: ../machine/stats.cc ../threads/copyright.h ../threads/utility.h \
  ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
@@ -315,18 +321,19 @@ timer.o: ../machine/timer.cc ../threads/copyright.h ../machine/timer.h \
  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
- ../machine/timer.h ../threads/synch.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h \
- ../filesys/openfile.h ../userprog/pcb.h ../threads/thread.h \
- ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
- /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/scheduler.h \
+ ../threads/list.h ../machine/interrupt.h ../threads/list.h \
+ ../machine/stats.h ../machine/timer.h ../threads/synchcons.h \
+ ../machine/console.h ../threads/synch.h ../userprog/ptable.h \
+ ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
+ /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/Lock.h ../userprog/bitmap.h
 addrspace.o: ../userprog/addrspace.cc ../threads/copyright.h \
  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -341,18 +348,19 @@ addrspace.o: ../userprog/addrspace.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h ../userprog/addrspace.h ../bin/noff.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h \
+ ../userprog/addrspace.h ../bin/noff.h
 bitmap.o: ../userprog/bitmap.cc ../threads/copyright.h \
  ../userprog/bitmap.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -379,18 +387,19 @@ exception.o: ../userprog/exception.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h ../userprog/syscall.h ../userprog/SCHandle.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h \
+ ../userprog/syscall.h ../userprog/SCHandle.h
 progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -405,18 +414,19 @@ progtest.o: ../userprog/progtest.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h ../userprog/addrspace.h
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
+ /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
+ /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/bits/time.h \
+ /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h \
+ ../userprog/addrspace.h
 console.o: ../machine/console.cc ../threads/copyright.h \
  ../machine/console.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -431,18 +441,19 @@ console.o: ../machine/console.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../threads/system.h ../threads/utility.h \
  ../threads/thread.h ../machine/machine.h ../machine/translate.h \
  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
- ../machine/timer.h ../threads/synch.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h \
- ../filesys/openfile.h ../userprog/pcb.h ../threads/thread.h \
- ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
- /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/scheduler.h \
+ ../threads/list.h ../machine/interrupt.h ../threads/list.h \
+ ../machine/stats.h ../machine/timer.h ../threads/synchcons.h \
+ ../machine/console.h ../threads/synch.h ../userprog/ptable.h \
+ ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
+ /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/Lock.h ../userprog/bitmap.h
 machine.o: ../machine/machine.cc ../threads/copyright.h \
  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -457,18 +468,19 @@ machine.o: ../machine/machine.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
  ../threads/system.h ../threads/utility.h ../threads/thread.h \
  ../machine/machine.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h ../threads/scheduler.h ../threads/list.h \
- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
- ../machine/timer.h ../threads/synch.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h \
- ../filesys/openfile.h ../userprog/pcb.h ../threads/thread.h \
- ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
- /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/scheduler.h \
+ ../threads/list.h ../machine/interrupt.h ../threads/list.h \
+ ../machine/stats.h ../machine/timer.h ../threads/synchcons.h \
+ ../machine/console.h ../threads/synch.h ../userprog/ptable.h \
+ ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
+ /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/Lock.h ../userprog/bitmap.h
 mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -483,18 +495,19 @@ mipssim.o: ../machine/mipssim.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
  ../machine/mipssim.h ../threads/system.h ../threads/utility.h \
  ../threads/thread.h ../machine/machine.h ../userprog/addrspace.h \
- ../filesys/filesys.h ../filesys/openfile.h ../threads/scheduler.h \
- ../threads/list.h ../machine/interrupt.h ../threads/list.h \
- ../machine/stats.h ../machine/timer.h ../threads/synch.h \
- ../threads/synchcons.h ../machine/console.h ../userprog/ptable.h \
- ../userprog/bitmap.h ../filesys/openfile.h ../userprog/pcb.h \
- ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
- /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/time.h \
- /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/semaphore.h ../userprog/bitmap.h
+ ../filesys/filesys.h ../filesys/openfile.h ../userprog/FDTable.h \
+ ../userprog/bitmap.h ../filesys/openfile.h ../userprog/FDBase.h \
+ ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
+ ../threads/list.h ../machine/stats.h ../machine/timer.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h ../userprog/pcb.h ../threads/thread.h \
+ ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
+ ../userprog/Lock.h ../userprog/bitmap.h
 translate.o: ../machine/translate.cc ../threads/copyright.h \
  ../machine/machine.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -509,18 +522,19 @@ translate.o: ../machine/translate.cc ../threads/copyright.h \
  /usr/include/xlocale.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
  ../threads/system.h ../threads/utility.h ../threads/thread.h \
- ../machine/machine.h ../threads/scheduler.h ../threads/list.h \
- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
- ../machine/timer.h ../threads/synch.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h \
- ../filesys/openfile.h ../userprog/pcb.h ../threads/thread.h \
- ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
- /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ ../machine/machine.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/scheduler.h \
+ ../threads/list.h ../machine/interrupt.h ../threads/list.h \
+ ../machine/stats.h ../machine/timer.h ../threads/synchcons.h \
+ ../machine/console.h ../threads/synch.h ../userprog/ptable.h \
+ ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
+ /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
+ /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
+ ../userprog/Lock.h ../userprog/bitmap.h
 synchcons.o: ../threads/synchcons.cc ../threads/synchcons.h \
  ../machine/console.h ../threads/copyright.h ../threads/utility.h \
  ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h \
@@ -535,8 +549,10 @@ synchcons.o: ../threads/synchcons.cc ../threads/synchcons.h \
  /usr/include/xlocale.h ../threads/synch.h ../threads/thread.h \
  ../threads/utility.h ../machine/machine.h ../machine/translate.h \
  ../machine/disk.h ../userprog/addrspace.h ../filesys/filesys.h \
- ../filesys/openfile.h ../threads/list.h
-SCHandle.o: ../userprog/SCHandle.cc ../userprog/SCHandle.h \
+ ../filesys/openfile.h ../userprog/FDTable.h ../userprog/bitmap.h \
+ ../filesys/openfile.h ../userprog/FDBase.h ../threads/list.h
+FDBase.o: ../userprog/FDBase.cc ../userprog/FDBase.h
+FDIn.o: ../userprog/FDIn.cc ../userprog/FDIn.h ../userprog/FDBase.h \
  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
@@ -550,22 +566,19 @@ SCHandle.o: ../userprog/SCHandle.cc ../userprog/SCHandle.h \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
  ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
  ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h ../userprog/pcb.h ../threads/thread.h \
+ ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
-FDBase.o: ../userprog/FileManagement/FDBase.cc \
- ../userprog/FileManagement/FDBase.h
-FDIn.o: ../userprog/FileManagement/FDIn.cc \
- ../userprog/FileManagement/FDIn.h ../userprog/FileManagement/FDBase.h \
+ ../userprog/Lock.h ../userprog/bitmap.h
+FDOut.o: ../userprog/FDOut.cc ../userprog/FDOut.h ../userprog/FDBase.h \
  ../threads/system.h ../threads/copyright.h ../threads/utility.h \
  ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
@@ -579,22 +592,45 @@ FDIn.o: ../userprog/FileManagement/FDIn.cc \
  /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
  ../threads/utility.h ../machine/translate.h ../machine/disk.h \
  ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
  ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
  ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h ../userprog/pcb.h ../threads/thread.h \
+ ../threads/synch.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
  /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
  /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
-FDOut.o: ../userprog/FileManagement/FDOut.cc \
- ../userprog/FileManagement/FDOut.h ../userprog/FileManagement/FDBase.h \
- ../threads/system.h ../threads/copyright.h ../threads/utility.h \
- ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+ ../userprog/Lock.h ../userprog/bitmap.h
+FDRo.o: ../userprog/FDRo.cc ../userprog/FDRo.h ../filesys/openfile.h \
+ ../threads/copyright.h ../threads/utility.h ../threads/copyright.h \
+ ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-32.h \
+ /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/string.h \
+ /usr/include/xlocale.h ../userprog/FDBase.h
+FDRw.o: ../userprog/FDRw.cc ../userprog/FDRw.h ../filesys/openfile.h \
+ ../threads/copyright.h ../threads/utility.h ../threads/copyright.h \
+ ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-32.h \
+ /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/string.h \
+ /usr/include/xlocale.h ../userprog/FDBase.h
+FDTable.o: ../userprog/FDTable.cc ../userprog/FDTable.h \
+ ../userprog/bitmap.h ../threads/copyright.h ../threads/utility.h \
+ ../threads/copyright.h ../threads/bool.h ../machine/sysdep.h \
  /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-32.h \
@@ -603,63 +639,9 @@ FDOut.o: ../userprog/FileManagement/FDOut.cc \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
  ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
  /usr/include/bits/sys_errlist.h /usr/include/string.h \
- /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
- ../threads/utility.h ../machine/translate.h ../machine/disk.h \
- ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
- ../threads/scheduler.h ../threads/list.h ../machine/interrupt.h \
- ../threads/list.h ../machine/stats.h ../machine/timer.h \
- ../threads/synch.h ../threads/synchcons.h ../machine/console.h \
- ../userprog/ptable.h ../userprog/bitmap.h ../filesys/openfile.h \
- ../userprog/pcb.h ../threads/thread.h ../threads/synch.h \
- /usr/include/semaphore.h /usr/include/sys/types.h /usr/include/time.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
- /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
- ../userprog/bitmap.h
-FDRo.o: ../userprog/FileManagement/FDRo.cc \
- ../userprog/FileManagement/FDRo.h ../filesys/openfile.h \
- ../threads/copyright.h ../threads/utility.h ../threads/copyright.h \
- ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
- /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-32.h \
- /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
- /usr/include/bits/sys_errlist.h /usr/include/string.h \
- /usr/include/xlocale.h ../userprog/FileManagement/FDBase.h
-FDRw.o: ../userprog/FileManagement/FDRw.cc \
- ../userprog/FileManagement/FDRw.h ../filesys/openfile.h \
- ../threads/copyright.h ../threads/utility.h ../threads/copyright.h \
- ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
- /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-32.h \
- /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
- /usr/include/bits/sys_errlist.h /usr/include/string.h \
- /usr/include/xlocale.h ../userprog/FileManagement/FDBase.h
-FDTable.o: ../userprog/FileManagement/FDTable.cc \
- ../userprog/FileManagement/FDTable.h ../userprog/bitmap.h \
- ../threads/copyright.h ../threads/utility.h ../threads/copyright.h \
- ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
- /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-32.h \
- /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
- /usr/include/bits/sys_errlist.h /usr/include/string.h \
- /usr/include/xlocale.h ../filesys/openfile.h \
- ../userprog/FileManagement/FDBase.h ../userprog/FileManagement/FDIn.h \
- ../userprog/FileManagement/FDOut.h ../userprog/FileManagement/FDRo.h \
- ../userprog/FileManagement/FDRw.h
+ /usr/include/xlocale.h ../filesys/openfile.h ../userprog/FDBase.h \
+ ../userprog/FDIn.h ../userprog/FDOut.h ../userprog/FDRo.h \
+ ../userprog/FDRw.h
 pcb.o: ../userprog/pcb.cc ../userprog/pcb.h ../threads/thread.h \
  ../threads/copyright.h ../threads/utility.h ../threads/bool.h \
  ../machine/sysdep.h ../threads/copyright.h /usr/include/stdio.h \
@@ -673,18 +655,19 @@ pcb.o: ../userprog/pcb.cc ../userprog/pcb.h ../threads/thread.h \
  /usr/include/bits/sys_errlist.h /usr/include/string.h \
  /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
- ../filesys/filesys.h ../filesys/openfile.h ../threads/synch.h \
- ../threads/thread.h ../threads/list.h ../threads/system.h \
- ../threads/scheduler.h ../machine/interrupt.h ../threads/list.h \
- ../machine/stats.h ../machine/timer.h ../threads/synch.h \
- ../threads/synchcons.h ../machine/console.h ../userprog/ptable.h \
- ../userprog/bitmap.h ../filesys/openfile.h /usr/include/semaphore.h \
- /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
- /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
- /usr/include/sys/select.h /usr/include/bits/select.h \
- /usr/include/bits/sigset.h /usr/include/bits/time.h \
- /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/semaphore.h ../userprog/bitmap.h
+ ../filesys/filesys.h ../filesys/openfile.h ../userprog/FDTable.h \
+ ../userprog/bitmap.h ../filesys/openfile.h ../userprog/FDBase.h \
+ ../threads/synch.h ../threads/thread.h ../threads/list.h \
+ ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+ ../threads/list.h ../machine/stats.h ../machine/timer.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
+ ../userprog/Lock.h ../userprog/bitmap.h
 ptable.o: ../userprog/ptable.cc ../userprog/ptable.h ../userprog/bitmap.h \
  ../threads/copyright.h ../threads/utility.h ../threads/copyright.h \
  ../threads/bool.h ../machine/sysdep.h /usr/include/stdio.h \
@@ -699,17 +682,61 @@ ptable.o: ../userprog/ptable.cc ../userprog/ptable.h ../userprog/bitmap.h \
  /usr/include/xlocale.h ../filesys/openfile.h ../userprog/pcb.h \
  ../threads/thread.h ../threads/utility.h ../machine/machine.h \
  ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
- ../filesys/filesys.h ../filesys/openfile.h ../threads/synch.h \
- ../threads/thread.h ../threads/list.h /usr/include/semaphore.h \
+ ../filesys/filesys.h ../filesys/openfile.h ../userprog/FDTable.h \
+ ../userprog/FDBase.h ../threads/synch.h ../threads/thread.h \
+ ../threads/list.h /usr/include/semaphore.h /usr/include/sys/types.h \
+ /usr/include/time.h /usr/include/endian.h /usr/include/bits/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/sys/select.h \
+ /usr/include/bits/select.h /usr/include/bits/sigset.h \
+ /usr/include/bits/time.h /usr/include/sys/sysmacros.h \
+ /usr/include/bits/pthreadtypes.h /usr/include/bits/semaphore.h \
+ ../threads/system.h ../threads/scheduler.h ../machine/interrupt.h \
+ ../threads/list.h ../machine/stats.h ../machine/timer.h \
+ ../threads/synchcons.h ../machine/console.h ../threads/synch.h \
+ ../userprog/ptable.h ../userprog/Lock.h ../userprog/bitmap.h
+Lock.o: ../userprog/Lock.cc ../userprog/Lock.h ../threads/thread.h \
+ ../threads/copyright.h ../threads/utility.h ../threads/bool.h \
+ ../machine/sysdep.h ../threads/copyright.h /usr/include/stdio.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-32.h \
+ /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/string.h \
+ /usr/include/xlocale.h ../machine/machine.h ../threads/utility.h \
+ ../machine/translate.h ../machine/disk.h ../userprog/addrspace.h \
+ ../filesys/filesys.h ../filesys/openfile.h ../userprog/FDTable.h \
+ ../userprog/bitmap.h ../filesys/openfile.h ../userprog/FDBase.h \
+ ../threads/synch.h ../threads/thread.h ../threads/list.h
+SCHandle.o: ../userprog/SCHandle.cc ../userprog/SCHandle.h \
+ ../threads/system.h ../threads/copyright.h ../threads/utility.h \
+ ../threads/bool.h ../machine/sysdep.h ../threads/copyright.h \
+ /usr/include/stdio.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-32.h \
+ /usr/lib/gcc/i686-redhat-linux/4.5.1/include/stddef.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ ../threads/stdarg.h /usr/include/bits/stdio_lim.h \
+ /usr/include/bits/sys_errlist.h /usr/include/string.h \
+ /usr/include/xlocale.h ../threads/thread.h ../machine/machine.h \
+ ../threads/utility.h ../machine/translate.h ../machine/disk.h \
+ ../userprog/addrspace.h ../filesys/filesys.h ../filesys/openfile.h \
+ ../userprog/FDTable.h ../userprog/bitmap.h ../filesys/openfile.h \
+ ../userprog/FDBase.h ../threads/scheduler.h ../threads/list.h \
+ ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
+ ../machine/timer.h ../threads/synchcons.h ../machine/console.h \
+ ../threads/synch.h ../userprog/ptable.h ../userprog/pcb.h \
+ ../threads/thread.h ../threads/synch.h /usr/include/semaphore.h \
  /usr/include/sys/types.h /usr/include/time.h /usr/include/endian.h \
  /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
  /usr/include/sys/select.h /usr/include/bits/select.h \
  /usr/include/bits/sigset.h /usr/include/bits/time.h \
  /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
- /usr/include/bits/semaphore.h ../threads/system.h ../threads/scheduler.h \
- ../machine/interrupt.h ../threads/list.h ../machine/stats.h \
- ../machine/timer.h ../threads/synch.h ../threads/synchcons.h \
- ../machine/console.h ../userprog/ptable.h ../userprog/bitmap.h
+ /usr/include/bits/semaphore.h ../userprog/Lock.h ../userprog/bitmap.h \
+ ../userprog/FDTable.h
 # DEPENDENCIES MUST END AT END OF FILE
 # IF YOU PUT STUFF HERE IT WILL GO AWAY
 # see make depend above

@@ -35,14 +35,16 @@
 Thread::Thread(char* threadName)
 {
     name = threadName;
-    processID = 0;
-    exitStatus = 0;
     stackTop = NULL;
     stack = NULL;
     status = JUST_CREATED;
+    //NOTE:
+    fTab = new FDTable();
+    processID = 0;
+    exitStatus = 0;
+    //
 #ifdef USER_PROGRAM
-    space = NULL;  
-   // fTab = new FDTable(10);
+    space = NULL;
 #endif
 }
 
@@ -61,7 +63,7 @@ Thread::Thread(char* threadName)
 Thread::~Thread()
 {
     DEBUG('t', "Deleting thread \"%s\"\n", name);
-
+delete fTab;
     ASSERT(this != currentThread);
     if (stack != NULL)
 	DeallocBoundedArray((char *) stack, StackSize * sizeof(int));

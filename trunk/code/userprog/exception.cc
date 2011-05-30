@@ -20,18 +20,13 @@
 // Copyright (c) 1992-1993 The Regents of the University of California.
 // All rights reserved.  See copyright.h for copyright notice and limitation 
 // of liability and disclaimer of warranty provisions.
-#ifndef SYSCHCONSOLE_H
-#define SYSCHCONSOLE_H
-#endif
 
 #include "copyright.h"
 #include "system.h"
 #include "syscall.h"
 #include "SCHandle.h"
 
-#define MaxFileLength 320
-#define MAX 2222
-
+#define dbgAddr 'f'
 //----------------------------------------------------------------------
 // ExceptionHandler
 // 	Entry point into the Nachos kernel.  Called when a user program
@@ -59,163 +54,115 @@ void
 ExceptionHandler(ExceptionType which)
 {
 	int type = machine->ReadRegister(2);
+	
 	switch (which)
 	{
 		case NoException:
-			printf("NoException");
-			IncreasePC() ;
-			return ;
-		case PageFaultException: 
-			printf("PageFaultException");
-			IncreasePC() ;
+			return;
+		case PageFaultException:
+			printf("\n Page fault exception.");
 			break;
-		case ReadOnlyException: 
-			printf("ReadOnlyException");
-			IncreasePC() ;
+			
+		case ReadOnlyException:
+			printf("\n Read only exception.");
 			break;
-		case BusErrorException: 
-			printf("BusErrorException");
-			IncreasePC() ;
+			
+		case BusErrorException:
+			printf("\n Bus error exception.");
 			break;
-		case AddressErrorException: 
-			printf("AddressErrorException");
-			IncreasePC() ;
+			
+		case AddressErrorException:
+			printf("\n Address error exception.");
 			break;
-		case OverflowException: 
-			printf("OverflowException");
-			IncreasePC() ;
+			
+		case OverflowException:
+			printf("\n Over flow exception.");
+			break;			
+			
+		case IllegalInstrException:
+			printf("\n Illegal instruction exception.!");
 			break;
-		case IllegalInstrException: 
-			printf("IllegalInstrException");
-			IncreasePC() ;
-			break;
-		case NumExceptionTypes: 
-			printf("NumExceptionTypes");
-			IncreasePC() ;
-			break;
+			
+		case NumExceptionTypes:
+			printf("\n Number exception types.");
+			break;	    
 		case SyscallException:
-			switch(type)
+			switch (type)
 			{
-				//NOTE: Multi-Programming
 				case SC_Halt:
-					doSC_Halt();
-					break;				
+					DEBUG(dbgAddr, "\n Shutdown, initiated by user program.");
+					printf ("\n\n Shutdown, initiated by user program");
+					interrupt->Halt();
+					break;
+					
+				case SC_Open:
+					doSC_Open();
+					break;
+					
+				case SC_Close:
+					doSC_Close();
+					break;
+					
+				case SC_Read:
+					doSC_Read();
+					break;
+					
+				case SC_Write:
+					doSC_Write();
+					break;
+					
+				case SC_Seek:
+					doSC_Seek();
+					break;
+					
+				case SC_CreateFile:
+					doSC_Create();
+					break;
+					
 				case SC_Exec:
+					DEBUG('a', "\n SC_Exec, initiated by user program.!");
 					doSC_Exec();
-					IncreasePC() ;
+					
 					break;
-				
+					
 				case SC_Join:
+					DEBUG('a', "\n SC_Join, initiated by user program.!");
 					doSC_Join();
-					IncreasePC() ;
 					break;
-				
-				case SC_Fork:
-					doSC_Fork();
-					IncreasePC() ;
-					break;
-				
-				case SC_Yield:
-					doSC_Yield();
-					IncreasePC() ;
-					break;
-				
+					
 				case SC_Exit:
+					DEBUG('a', "\n SC_Exit, initiated by user program.!");
 					doSC_Exit();
-					IncreasePC() ;
 					break;
-				case SC_CreateLock:
+					
+				case SC_CreateLock :
 					doSC_CreateLock();
-					IncreasePC() ;
 					break;
 				case SC_Acquire:
 					doSC_Acquire();
-					IncreasePC() ;
 					break;
 				case SC_Release:
 					doSC_Release();
-					IncreasePC() ;
 					break;
-				//NOTE: I/O
-				case SC_Create:
-				{
-					doSC_Create();
-					IncreasePC() ;
-					break;
-				}
-				case SC_Open:
-				{
-					IncreasePC() ;
-					break;
-				}
-				case SC_Read:
-				{
-					doSC_Read();
-					IncreasePC() ;
-					break;
-				}
-				case SC_Write:
-				{
-					doSC_Write();
-					IncreasePC() ;
-					break;
-				}
-				case SC_Close:
-				{
-					doSC_Close();
-					IncreasePC() ;
-					break;
-				}
-				
-				//NOTE: Do an I
-				case SC_ReadString:
-				{
-					int virtAddr = machine->ReadRegister(4); 
-					int length = machine->ReadRegister(5); 
-					char *buffer = new char [MAX];
-					int nByte;
-					while (1)
-					{
-						nByte = gSynchConsole->Read(buffer, MAX);
-						if (nByte > length)
-						{
-							gSynchConsole->Write("Vuot Qua Do Dai Cho Phep.!!",27);
-							nByte = length;
-							break;
-						}
-						break;
-					}
-					System2User(virtAddr,nByte,buffer) ;
-					delete buffer;
-					//machine->WriteRegister(2,0);					
-					IncreasePC() ;
-					break;
-				}
-				case SC_PrintString:
-				{
-					int virtAddr = machine->ReadRegister(4);
-					char* buffer = new char[MAX];
-					buffer = User2System(virtAddr,MAX+1);  
-					int len = 0;
-					while(buffer[len++] != '\0');
 					
-					if (buffer == NULL) 
-					{ 
-						printf("\n Not enough memory in system"); 
-						machine->WriteRegister(2,-1);
-						delete buffer; 
-						return; 
-					} 
-					gSynchConsole->Write(buffer, len);
-					delete buffer;
-					machine->WriteRegister(2,0);					
-					IncreasePC() ;
+				case SC_Fork:
+					printf("\n SC_Fork");
+					interrupt->Halt();
 					break;
-				}
-				
-				
+					
+				default:
+					printf("\n SyscallException:  Unexpected system call %d", type);
+					interrupt->Halt();
 			}
-		
-	}
+			
+			DEBUG(dbgAddr, "\n Incrementing PC.");
+			IncreasePC();
+			break;
+			
+			
+			
+		default:
+			printf("\n Unexpected user mode exception (%d %d)", which, type);
+			interrupt->Halt();
+	}    
 }
-

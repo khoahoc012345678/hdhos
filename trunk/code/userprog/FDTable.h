@@ -12,12 +12,14 @@ private:
 	BitMap bm;
 	FDBase *fTable[MAXFILE];
 public:
-	FDTable();	
+	FDTable();
 	~FDTable();
+	void  createCout();
+	void  createCin();
 	
-	int FindFreeSlot();	
-	bool IsExistID(int id);
-
+ 	int FindFreeSlot();	
+	bool IsExistID(int id);	
+	
 	int fdCreate();
 	int fdOpen(int virAddr, int type, int id, OpenFile *of);
 	int fdClose(int id);

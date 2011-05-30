@@ -1,24 +1,9 @@
-
-#include "syscall.h"
-#include "copyright.h"
-
-#define maxlen 32
-int main()
-{
-	int len;
-	char filename[maxlen+1];
-char* name = "test.txt";
-len = Create(name)	;
-if (len == -1)
-{
-Write("testing exec\n",13,ConsoleOutput);
-
-}
-else
-{
-Write("testing fail\n",13,ConsoleOutput);
-
-}
-Halt();	
-	return 0;
+  #include "syscall.h"
+  void
+  main ()
+  {
+	  char fileCreate[32];
+	  Write("Nhap vao ten file :\n",30,ConsoleOutput);
+	  Read(fileCreate,32,ConsoleInput);
+	  Create(fileCreate);
 }

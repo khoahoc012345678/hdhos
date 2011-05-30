@@ -70,7 +70,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
 		(WordToHost(noffH.noffMagic) == NOFFMAGIC))
     	SwapHeader(&noffH);
     ASSERT(noffH.noffMagic == NOFFMAGIC);
-    addrLock->Acquire();
+
 // how big is address space?
     size = noffH.code.size + noffH.initData.size + noffH.uninitData.size 
 			+ UserStackSize;	// we need to increase the size
@@ -89,7 +89,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
     pageTable = new TranslationEntry[numPages];
     for (i = 0; i < numPages; i++) {
 	pageTable[i].virtualPage = i;	// for now, virtual page # = phys page #
-	pageTable[i].physicalPage = bmTab->Find(); //NOTE
+	pageTable[i].physicalPage = i;
 	pageTable[i].valid = TRUE;
 	pageTable[i].use = FALSE;
 	pageTable[i].dirty = FALSE;
@@ -101,7 +101,7 @@ AddrSpace::AddrSpace(OpenFile *executable)
 // zero out the entire address space, to zero the unitialized data segment 
 // and the stack segment
     bzero(machine->mainMemory, size);
-    addrLock->Release();
+
 // then, copy in the code and data segments into memory
     if (noffH.code.size > 0) {
         DEBUG('a', "Initializing code segment, at 0x%x, size %d\n", 
@@ -117,7 +117,8 @@ AddrSpace::AddrSpace(OpenFile *executable)
     }
 
 }
-
+//NOTE:
+//NEW AddrSpace
 AddrSpace::AddrSpace(char * filename)
 {
 	NoffHeader noffH;
@@ -216,7 +217,6 @@ AddrSpace::AddrSpace(char * filename)
 	return ;
 }
 
-		
 //----------------------------------------------------------------------
 // AddrSpace::~AddrSpace
 // 	Dealloate an address space.  Nothing for now!
@@ -224,9 +224,7 @@ AddrSpace::AddrSpace(char * filename)
 
 AddrSpace::~AddrSpace()
 {
-	for(int i = 0; i < numPages ; i++)
-		bmTab->Clear(pageTable[i].physicalPage);
-	delete pageTable;
+   delete pageTable;
 }
 
 //----------------------------------------------------------------------

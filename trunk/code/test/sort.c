@@ -1,37 +1,32 @@
+/* sort.c 
+ *    Test program to sort a large number of integers.
+ *
+ *    Intention is to stress virtual memory system.
+ *
+ *    Ideally, we could read the unsorted array off of the file system,
+ *	and store the result back to the file system!
+ */
+
 #include "syscall.h"
 
-int A[105];
-int main()
+int A[1024];	/* size of physical memory; with code, we'll run out of space!*/
+
+int
+main()
 {
-    int n = ReadInt ();
-    if (n>100)
-    {
-	    PrintString("Qua Dai, EXIT!!!");
-	    Exit(1);	
-    }
-    else
-    {
-    	int i, j, tmp;
-	PrintString("Moi nhap cac phan tu:\n");
-    	for (i = 0; i < n; i++)	
-	{	
-     	   	A[i] = ReadInt();
-	}
-    	for (i = 0; i < n - 2; i++)
-	{
-       		for (j = n-1; j >i; j--)
-		{
-		   	if (A[j] < A[j - 1]) 
-			{
-	      			tmp = A[j];
-	      			A[j] = A[j - 1];
-	      			A[j - 1] = tmp;
-    	   		}
-		}
-	}
-	
-    	for (i = 0; i < n; i++)		
-     	   	PrintInt(A[i]);
-   }
-     Exit(1);	
+    int i, j, tmp;
+
+    /* first initialize the array, in reverse sorted order */
+    for (i = 0; i < 1024; i++)		
+        A[i] = 1024 - i;
+
+    /* then sort! */
+    for (i = 0; i < 1023; i++)
+        for (j = i; j < (1023 - i); j++)
+	   if (A[j] > A[j + 1]) {	/* out of order -> need to swap ! */
+	      tmp = A[j];
+	      A[j] = A[j + 1];
+	      A[j + 1] = tmp;
+    	   }
+    Exit(A[0]);		/* and then we're done -- should be 0! */
 }

@@ -116,8 +116,7 @@ main(int argc, char **argv)
             argCount = 2;
         } else if (!strcmp(*argv, "-c")) {      // test the console
 	    if (argc == 1)
-		    ThreadTest();
-		    //ConsoleTest(NULL, NULL);
+	        ConsoleTest(NULL, NULL);
 	    else {
 		ASSERT(argc > 2);
 	        ConsoleTest(*(argv + 1), *(argv + 2));

@@ -2,11 +2,13 @@
 #define PCB_H
 #include "thread.h"
 #include "synch.h"
+extern void StartProcess(int id);
 class PCB{
 private:
 	Semaphore *joinsem;//semaphore cho quá trình join
 	Semaphore *exitsem;//semaphore cho quá trình exit
 	Semaphore *mutex;
+	
 	int	exitcode;
 	Thread	*thread;
 	int	pid;
@@ -18,7 +20,7 @@ public:
 	char 	*filename;//luu filename cua tien trinh ,phuc vu cho ham Fork
 	int priority;
 	//END
-	
+	PCB();	//main
 	PCB(int id);
 	~PCB();
 	int Exec(char *filename,int pid);// nạp chƣơng trình có tên lƣu trong biến filename và //processID sẽ là pid

@@ -9,7 +9,6 @@ int doSC_Read();
 int doSC_Write();
 int doSC_Seek();
 
-int doSC_Halt();
 int doSC_Exec();
 int doSC_Join();
 int doSC_Fork();

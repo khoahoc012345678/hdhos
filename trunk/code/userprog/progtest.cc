@@ -23,27 +23,26 @@
 void
 StartProcess(char *filename)
 {
-	OpenFile *executable = fileSystem->Open(filename);
-	AddrSpace *space;
-	printf ("\n--> StartProcess!!!!!!!!!!!!!\n");
-	if (executable == NULL) {
-		printf("Unable to open file %s\n", filename);
-		return;
-	}
-	space = new AddrSpace(filename);    
-	currentThread->space = space;
-	
-	delete executable;			// close file
-	
-	space->InitRegisters();		// set the initial register values
-	space->RestoreState();		// load page table register
-	
-	machine->Run();			// jump to the user progam
-	ASSERT(FALSE);			// machine->Run never returns;
-	// the address space exits
-	// by doing the syscall "exit"
-}
+    OpenFile *executable = fileSystem->Open(filename);
+    AddrSpace *space;
 
+    if (executable == NULL) {
+	printf("Unable to open file %s\n", filename);
+	return;
+    }
+    space = new AddrSpace(filename);    
+    currentThread->space = space;
+
+    delete executable;			// close file
+
+    space->InitRegisters();		// set the initial register values
+    space->RestoreState();		// load page table register
+
+    machine->Run();			// jump to the user progam
+    ASSERT(FALSE);			// machine->Run never returns;
+					// the address space exits
+					// by doing the syscall "exit"
+}
 
 //NOTE:ADD
 void
@@ -99,17 +98,17 @@ static void WriteDone(int arg) { writeDone->V(); }
 void 
 ConsoleTest (char *in, char *out)
 {
-	char ch;
-	
-	console = new Console(in, out, ReadAvail, WriteDone, 0);
-	readAvail = new Semaphore("read avail", 0);
-	writeDone = new Semaphore("write done", 0);
-	
-	for (;;) {
-		readAvail->P();		// wait for character to arrive
-		ch = console->GetChar();
-		console->PutChar(ch);	// echo it!
-		writeDone->P() ;        // wait for write to finish
-		if (ch == 'q') return;  // if q, quit
-	}
+    char ch;
+
+    console = new Console(in, out, ReadAvail, WriteDone, 0);
+    readAvail = new Semaphore("read avail", 0);
+    writeDone = new Semaphore("write done", 0);
+    
+    for (;;) {
+	readAvail->P();		// wait for character to arrive
+	ch = console->GetChar();
+	console->PutChar(ch);	// echo it!
+	writeDone->P() ;        // wait for write to finish
+	if (ch == 'q') return;  // if q, quit
+    }
 }

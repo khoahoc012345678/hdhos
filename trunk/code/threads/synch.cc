@@ -100,10 +100,28 @@ Semaphore::V()
 // Dummy functions -- so we can compile our later assignments 
 // Note -- without a correct implementation of Condition::Wait(), 
 // the test case in the network assignment won't work!
-Lock::Lock(char* debugName) {}
-Lock::~Lock() {}
-void Lock::Acquire() {}
-void Lock::Release() {}
+Lock::Lock(char* debugName) {
+	name = debugName;
+	lock = new Semaphore("lock",1);
+}
+Lock::~Lock() {
+	delete lock;
+}
+void Lock::Acquire() {
+	IntStatus oldLevel = interrupt->SetLevel (IntOff);	//disable interrupts
+	lock->P();						//procure the semaphore
+	owner = currentThread;					//record the new owner of the lock
+	(void) interrupt->SetLevel(oldLevel);			//re-enable interrupt
+}
+void Lock::Release() {
+	IntStatus oldLevel = interrupt->SetLevel(IntOff);	//disable interrupts
+	//Ensure: a) lock is BUSY  b)this thread is the same one that aquired
+	ASSERT(currentThread == owner);
+	owner = NULL;			//clear the owner
+	lock->V();			//vanish the semaphore
+	(void) interrupt->SetLevel(oldLevel);
+}
+
 
 Condition::Condition(char* debugName) { }
 Condition::~Condition() { }

@@ -12,7 +12,10 @@
 
 # if you are cross-compiling, you need to point to the right executables
 # and change the flags to ld and the build procedure for as
-
+# GCCDIR = ~/gnu/local/decstation-ultrix/bin/
+# LDFLAGS = -T script -N
+# ASFLAGS = -mips
+# CPPFLAGS = $(INCDIR)
 GCCDIR = ../../../bin/
 
 LDFLAGS = -T script -N
@@ -35,7 +38,8 @@ CPP = gcc -E
 INCDIR =-I../userprog -I../threads
 CFLAGS = -G 0 -c $(INCDIR)
 
-all: halt shell matmult testMulti createfile TestString ASCII help
+
+all: halt shell matmult sort consoleA consoleB test createfile
 
 start.o: start.s ../userprog/syscall.h
 	$(CPP) $(CPPFLAGS) start.c > strt.s
@@ -54,40 +58,38 @@ shell: shell.o start.o
 	$(LD) $(LDFLAGS) start.o shell.o -o shell.coff
 	../bin/coff2noff shell.coff shell
 
+sort.o: sort.c
+	$(CC) $(CFLAGS) -c sort.c
+sort: sort.o start.o
+	$(LD) $(LDFLAGS) start.o sort.o -o sort.coff
+	../bin/coff2noff sort.coff sort
+
 matmult.o: matmult.c
 	$(CC) $(CFLAGS) -c matmult.c
 matmult: matmult.o start.o
 	$(LD) $(LDFLAGS) start.o matmult.o -o matmult.coff
 	../bin/coff2noff matmult.coff matmult
 
-testMulti.o: testMulti.c
-	$(CC) $(CFLAGS) -c testMulti.c
-testMulti: testMulti.o start.o
-	$(LD) $(LDFLAGS) start.o testMulti.o -o testMulti.coff
-	../bin/coff2noff testMulti.coff testMulti
-
 createfile.o: createfile.c
 	$(CC) $(CFLAGS) -c createfile.c
 createfile: createfile.o start.o
 	$(LD) $(LDFLAGS) start.o createfile.o -o createfile.coff
 	../bin/coff2noff createfile.coff createfile
-	
-TestString.o: TestString.c
-	$(CC) $(CFLAGS) -c TestString.c
-TestString: TestString.o start.o
-	$(LD) $(LDFLAGS) start.o TestString.o -o TestString.coff
-	../bin/coff2noff TestString.coff TestString
-	
-help.o: help.c
-	$(CC) $(CFLAGS) -c help.c
-help: help.o start.o
-	$(LD) $(LDFLAGS) start.o help.o -o help.coff
-	../bin/coff2noff help.coff help
 
-ASCII.o: ASCII.c
-	$(CC) $(CFLAGS) -c ASCII.c
-ASCII: ASCII.o start.o
-	$(LD) $(LDFLAGS) start.o ASCII.o -o ASCII.coff
-	../bin/coff2noff ASCII.coff ASCII
+consoleA.o: consoleA.c
+	$(CC) $(CFLAGS) -c consoleA.c
+consoleA: consoleA.o start.o
+	$(LD) $(LDFLAGS) start.o consoleA.o -o consoleA.coff
+	../bin/coff2noff consoleA.coff consoleA
 
+consoleB.o: consoleB.c
+	$(CC) $(CFLAGS) -c consoleB.c
+consoleB: consoleB.o start.o
+	$(LD) $(LDFLAGS) start.o consoleB.o -o consoleB.coff
+	../bin/coff2noff consoleB.coff consoleB
 
+test.o: test.c
+	$(CC) $(CFLAGS) -c test.c
+test: test.o start.o
+	$(LD) $(LDFLAGS) start.o test.o -o test.coff
+	../bin/coff2noff test.coff test
