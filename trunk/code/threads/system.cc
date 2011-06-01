@@ -17,7 +17,7 @@ Scheduler *scheduler;			// the ready list
 Interrupt *interrupt;			// interrupt status
 Statistics *stats;			// performance metrics
 Timer *timer;				// the hardware timer device,
-					// for invoking context switches
+// for invoking context switches
 //NOTE:ADD
 SynchConsole *gSynchConsole;
 Lock	*addrLock;
@@ -66,8 +66,8 @@ extern void Cleanup();
 static void
 TimerInterruptHandler(int dummy)
 {
-    if (interrupt->getStatus() != IdleMode)
-	interrupt->YieldOnReturn();
+	if (interrupt->getStatus() != IdleMode)
+		interrupt->YieldOnReturn();
 }
 
 //----------------------------------------------------------------------
@@ -83,97 +83,97 @@ TimerInterruptHandler(int dummy)
 void
 Initialize(int argc, char **argv)
 {
-    int argCount;
-    char* debugArgs = "";
-    bool randomYield = FALSE;
-
-#ifdef USER_PROGRAM
-    bool debugUserProg = FALSE;	// single step user program
-#endif
-#ifdef FILESYS_NEEDED
-    bool format = FALSE;	// format disk
-#endif
-#ifdef NETWORK
-    double rely = 1;		// network reliability
-    int netname = 0;		// UNIX socket name
-#endif
-    
-    for (argc--, argv++; argc > 0; argc -= argCount, argv += argCount) {
-	argCount = 1;
-	if (!strcmp(*argv, "-d")) {
-	    if (argc == 1)
-		debugArgs = "+";	// turn on all debug flags
-	    else {
-	    	debugArgs = *(argv + 1);
-	    	argCount = 2;
-	    }
-	} else if (!strcmp(*argv, "-rs")) {
-	    ASSERT(argc > 1);
-	    RandomInit(atoi(*(argv + 1)));	// initialize pseudo-random
-						// number generator
-	    randomYield = TRUE;
-	    argCount = 2;
+	int argCount;
+	char* debugArgs = "";
+	bool randomYield = FALSE;
+	
+	#ifdef USER_PROGRAM
+	bool debugUserProg = FALSE;	// single step user program
+	#endif
+	#ifdef FILESYS_NEEDED
+	bool format = FALSE;	// format disk
+	#endif
+	#ifdef NETWORK
+	double rely = 1;		// network reliability
+	int netname = 0;		// UNIX socket name
+	#endif
+	
+	for (argc--, argv++; argc > 0; argc -= argCount, argv += argCount) {
+		argCount = 1;
+		if (!strcmp(*argv, "-d")) {
+			if (argc == 1)
+				debugArgs = "+";	// turn on all debug flags
+				else {
+					debugArgs = *(argv + 1);
+					argCount = 2;
+				}
+		} else if (!strcmp(*argv, "-rs")) {
+			ASSERT(argc > 1);
+			RandomInit(atoi(*(argv + 1)));	// initialize pseudo-random
+			// number generator
+			randomYield = TRUE;
+			argCount = 2;
+		}
+		#ifdef USER_PROGRAM
+		if (!strcmp(*argv, "-s"))
+			debugUserProg = TRUE;
+		#endif
+			#ifdef FILESYS_NEEDED
+			if (!strcmp(*argv, "-f"))
+				format = TRUE;
+				#endif
+				#ifdef NETWORK
+				if (!strcmp(*argv, "-l")) {
+					ASSERT(argc > 1);
+					rely = atof(*(argv + 1));
+					argCount = 2;
+				} else if (!strcmp(*argv, "-m")) {
+					ASSERT(argc > 1);
+					netname = atoi(*(argv + 1));
+					argCount = 2;
+				}
+				#endif
 	}
-#ifdef USER_PROGRAM
-	if (!strcmp(*argv, "-s"))
-	    debugUserProg = TRUE;
-#endif
-#ifdef FILESYS_NEEDED
-	if (!strcmp(*argv, "-f"))
-	    format = TRUE;
-#endif
-#ifdef NETWORK
-	if (!strcmp(*argv, "-l")) {
-	    ASSERT(argc > 1);
-	    rely = atof(*(argv + 1));
-	    argCount = 2;
-	} else if (!strcmp(*argv, "-m")) {
-	    ASSERT(argc > 1);
-	    netname = atoi(*(argv + 1));
-	    argCount = 2;
-	}
-#endif
-    }
-
-    DebugInit(debugArgs);			// initialize DEBUG messages
-    stats = new Statistics();			// collect statistics
-    interrupt = new Interrupt;			// start up interrupt handling
-    scheduler = new Scheduler();		// initialize the ready queue
-    if (randomYield)				// start the timer (if needed)
+	
+	DebugInit(debugArgs);			// initialize DEBUG messages
+	stats = new Statistics();			// collect statistics
+	interrupt = new Interrupt;			// start up interrupt handling
+	scheduler = new Scheduler();		// initialize the ready queue
+	if (randomYield)				// start the timer (if needed)
 	timer = new Timer(TimerInterruptHandler, 0, randomYield);
-
-    threadToBeDestroyed = NULL;
-
-    // We didn't explicitly allocate the current thread we are running in.
-    // But if it ever tries to give up the CPU, we better have a Thread
-    // object to save its state. 
-    currentThread = new Thread("main");		
-    currentThread->setStatus(RUNNING);
-
-    interrupt->Enable();
-    CallOnUserAbort(Cleanup);			// if user hits ctl-C
-    
-#ifdef USER_PROGRAM
-    machine = new Machine(debugUserProg);	// this must come first
-    //NOTE:
-    gSynchConsole = new SynchConsole();
-    addrLock = new Lock ("addrLock");
-    bmTab = new BitMap (256);    
-    processTab = new PTable (10);
-    lockTab = new LockTable ();
-#endif
-
-#ifdef FILESYS
-    synchDisk = new SynchDisk("DISK");
-#endif
-
-#ifdef FILESYS_NEEDED
-    fileSystem = new FileSystem(format);
-#endif
-
-#ifdef NETWORK
-    postOffice = new PostOffice(netname, rely, 10);
-#endif
+	
+	threadToBeDestroyed = NULL;
+	
+	// We didn't explicitly allocate the current thread we are running in.
+	// But if it ever tries to give up the CPU, we better have a Thread
+	// object to save its state. 
+	currentThread = new Thread("main");		
+	currentThread->setStatus(RUNNING);
+	
+	interrupt->Enable();
+	CallOnUserAbort(Cleanup);			// if user hits ctl-C
+	
+	#ifdef USER_PROGRAM
+	machine = new Machine(debugUserProg);	// this must come first
+	//NOTE:
+	gSynchConsole = new SynchConsole();
+	addrLock = new Lock ("addrLock");
+	bmTab = new BitMap (256);    
+	processTab = new PTable (10);
+	lockTab = new LockTable ();
+	#endif
+	
+	#ifdef FILESYS
+	synchDisk = new SynchDisk("DISK");
+	#endif
+	
+	#ifdef FILESYS_NEEDED
+	fileSystem = new FileSystem(format);
+	#endif
+	
+	#ifdef NETWORK
+	postOffice = new PostOffice(netname, rely, 10);
+	#endif
 }
 
 //----------------------------------------------------------------------
@@ -183,33 +183,37 @@ Initialize(int argc, char **argv)
 void
 Cleanup()
 {
-    printf("\nCleaning up...\n");
-#ifdef NETWORK
-    delete postOffice;
-#endif
-    
-#ifdef USER_PROGRAM
-    delete machine;
-    //NOTE:
-    delete gSynchConsole;
-    delete addrLock;
-    delete processTab;
-    delete lockTab;
-#endif
-
-#ifdef FILESYS_NEEDED
-    delete fileSystem;
-#endif
-
-#ifdef FILESYS
-    delete synchDisk;
-#endif
-    
-    delete timer;
-    delete scheduler;
-    delete interrupt;
-    //NOTE:
-    delete bmTab;
-    Exit(0);
+	printf("\nCleaning up...\n");
+	#ifdef NETWORK
+	delete postOffice;
+	#endif
+	
+	#ifdef USER_PROGRAM
+	delete machine;
+	//NOTE:
+	delete gSynchConsole;
+	if (addrLock!= NULL)
+		delete addrLock;
+	if (processTab!= NULL)
+		delete processTab;
+	if (lockTab!= NULL)
+		delete lockTab;
+	#endif
+		
+		#ifdef FILESYS_NEEDED
+		delete fileSystem;
+		#endif
+		
+		#ifdef FILESYS
+		delete synchDisk;
+		#endif
+		
+		delete timer;
+		delete scheduler;
+		delete interrupt;
+		//NOTE:
+		if (bmTab!= NULL)
+			delete bmTab;
+		Exit(0);
 }
 
