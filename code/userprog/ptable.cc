@@ -12,9 +12,9 @@
 	 bmsem = new Semaphore ("bmsem", 1);
 	 bm->Mark(0);
 	 pcb[0] = new PCB(0);
-	 pcb[0]->filename = "./test/shell";
+	 pcb[0]->filename = currentThread->getName();
 	 pcb[0]->parentID = -1;
-	 //printf ("\n--> End Khoi tao ptable");
+	 printf ("\n--> End Khoi tao ptable");
  }
  // hủy các đối tuợng đã tạo
  PTable::~PTable()
