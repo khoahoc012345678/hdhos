@@ -5,55 +5,25 @@
 
 int doSC_Create()
 {
-	int virtAddr;
-	char* filename;
+	int virtAddr; 
+	char* filename; 
 	
-	//  printf("\n SC_Create call...");
-	//printf("\n Reading virtual address of file name.");
-	DEBUG(dbgFile,"\n SC_Create call ...");
-	DEBUG(dbgFile,"\n Reading virtual address of filename");
-	
-	// check for exception
-	virtAddr = machine->ReadRegister(4);
-	DEBUG (dbgFile,"\n Reading filename.");
-	filename = User2System(virtAddr,MaxFileLength+1);
-	if (filename == NULL)
-	{
-		printf("\n Not enough memory in system");
-		DEBUG(dbgFile,"\n Not enough memory in system");
+	virtAddr = machine->ReadRegister(4); 
+	filename = User2System(virtAddr,MaxFileLength+1);  
+	if (filename == NULL) 
+	{ 				  
 		machine->WriteRegister(2,-1);
-		delete filename;
-		return -1;
-	}
-	
-	if (strlen(filename) == 0 || (strlen(filename) >= MaxFileLength+1))
-	{
-		printf("\n Too many characters in filename: %s",filename);
-		DEBUG(dbgFile,"\n Too many characters in filename");
-		machine->WriteRegister(2,-1);
-		delete filename;
-		return -1;
-	}
-	
-	//printf("\n Finish reading filename.");
-	//printf("\n File name: '%s'",filename);
-	DEBUG(dbgFile,"\n Finish reading filename.");
-	//DEBUG(dbgFile,"\n File name : '"<<filename<<"'");
-	
-	// Create file with size = 0
-	if (!fileSystem->Create(filename,0))
-	{
-		printf("\n Error create file '%s'",filename);
-		delete filename;
-		machine->WriteRegister(2,-1);
-		delete filename;
-		return -1;
-	}
-	//printf("\n Create file '%s' success",filename);
-	
-	machine->WriteRegister(2,0);
-	
-	delete filename;
+		delete filename; 
+		return -1; 
+	} 
+	if (!fileSystem->Create(filename,0)) 
+	{ 
+		machine->WriteRegister(2,-1); 
+		delete filename; 
+		return -1; 
+	} 
+	machine->WriteRegister(2,0); 
+	delete filename; 
 	return 0;
 }
 
@@ -82,10 +52,9 @@ int doSC_Read()
 		printf("\n ReadError: reading file id %d is not opened",id);
 		return -1;
 	}
-	
+	//int rs = gSynchConsole->Read(buffer,size);
 	int rs = currentThread->fTab->fdRead(buffer,size,id);
-	
-	machine->WriteRegister(2,rs);
+	System2User(virtAddr,rs,buffer) ;
 	
 	return rs;
 }
@@ -113,9 +82,8 @@ int doSC_Write()
 		printf("\n WriteError: writing file id %d is not opened",id);
 		return -1;
 	}
-	
+	//int rs = gSynchConsole->Write(buffer,size);
 	int rs = currentThread->fTab->fdWrite(buffer,size,id);
-	
 	machine->WriteRegister(2,rs);
 	
 	return rs;

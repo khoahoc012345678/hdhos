@@ -32,7 +32,6 @@
 #define SC_CreateLock	11
 #define SC_Acquire	12
 #define SC_Release	13
-#define SC_CreateFile	14
 #define SC_Seek		15
 #ifndef IN_ASM
 

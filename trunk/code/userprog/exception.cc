@@ -115,7 +115,7 @@ ExceptionHandler(ExceptionType which)
 					doSC_Seek();
 					break;
 					
-				case SC_CreateFile:
+				case SC_Create:
 					doSC_Create();
 					break;
 					
