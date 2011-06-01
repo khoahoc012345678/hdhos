@@ -224,6 +224,11 @@ AddrSpace::AddrSpace(char * filename)
 
 AddrSpace::~AddrSpace()
 {
+	int i;
+	
+	for(i = 0; i < numPages ; i++)
+		bmTab->Clear(pageTable[i].physicalPage);
+	
    delete pageTable;
 }
 

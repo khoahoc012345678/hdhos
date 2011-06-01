@@ -3,8 +3,8 @@
  main()
  {
 	 int i = 0;
-	 for(;i < 50; i++)
+	 for(;i < 1; i++)
 	 {
-		 Write("A", 2, ConsoleOutput);
+		 Write("B", 2, ConsoleOutput);
 	 }
  }
