@@ -23,7 +23,9 @@ FDTable::FDTable() : bm(MAXFILE)
 
 FDTable::~FDTable()
 {
-	delete []fTable;
+	for(int i = 0;i<MAXFILE;i++)
+		if (fTable[i]!=NULL)
+			fTable[i] = NULL;
 }
 
 // Purpose : them 1 item vao bang fTable
