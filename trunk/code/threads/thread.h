@@ -89,7 +89,9 @@ class Thread {
    void FreeSpace()
    {
 	   delete space;
-	  // delete fTab;
+	  
+		  if (fTab != NULL)
+			delete fTab;
    }
    //END
 	  Thread(char* debugName);		// initialize a Thread 

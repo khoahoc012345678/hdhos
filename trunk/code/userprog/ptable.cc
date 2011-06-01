@@ -24,7 +24,7 @@
 	 for( int i = psize-1; i > 0 ; i--){
 		 if (bm->Test(i))
 		 {
-			 delete pcb[i];
+			 //delete pcb[i];
 			 pcb[i] = NULL;
 		 }
 	 }	
