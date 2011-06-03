@@ -65,7 +65,7 @@ int PCB::Exec(char *filename,int pid)
 	//NOTE: can 1 mang chua ten file cho moi thread danh dau bang PID de truyen tham so vao NewStartProcess
 	this->thread->processID = pid;
 	this->parentID = currentThread->processID;
-	
+	this->thread->priority = this->priority;
 	this->thread->Fork(StartProcess,pid);
 	mutex->V();
 	//printf ("\n-->Ket thuc PCB[id]-->Exec");

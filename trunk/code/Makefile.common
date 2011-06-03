@@ -47,7 +47,8 @@ THREAD_H =../threads/copyright.h\
 	../machine/interrupt.h\
 	../machine/sysdep.h\
 	../machine/stats.h\
-	../machine/timer.h
+	../machine/timer.h\
+	../threads/MyList.h
 
 THREAD_C =../threads/main.cc\
 	../threads/list.cc\
@@ -61,12 +62,13 @@ THREAD_C =../threads/main.cc\
 	../machine/interrupt.cc\
 	../machine/sysdep.cc\
 	../machine/stats.cc\
-	../machine/timer.cc
+	../machine/timer.cc\
+	../threads/MyList.cc
 
 THREAD_S = ../threads/switch.s
 
 THREAD_O =main.o list.o scheduler.o synch.o synchlist.o system.o thread.o \
-	utility.o threadtest.o interrupt.o stats.o sysdep.o timer.o
+	utility.o threadtest.o interrupt.o stats.o sysdep.o timer.o MyList.o
 
 USERPROG_H = ../userprog/addrspace.h\
 	../userprog/bitmap.h\
@@ -86,6 +88,7 @@ USERPROG_H = ../userprog/addrspace.h\
 	../userprog/pcb.h\
 	../userprog/ptable.h\
 	../userprog/Lock.h\
+	../userprog/stable.h\
 	../userprog/SCHandle.h
 
 USERPROG_C = ../userprog/addrspace.cc\
@@ -106,10 +109,11 @@ USERPROG_C = ../userprog/addrspace.cc\
 	../userprog/pcb.cc\
 	../userprog/ptable.cc\
 	../userprog/Lock.cc\
+	../userprog/stable.cc\
 	../userprog/SCHandle.cc 
 
 USERPROG_O = addrspace.o bitmap.o exception.o progtest.o console.o machine.o \
-	mipssim.o translate.o synchcons.o FDBase.o FDIn.o FDOut.o FDRo.o FDRw.o FDTable.o pcb.o ptable.o Lock.o SCHandle.o 
+	mipssim.o translate.o synchcons.o FDBase.o FDIn.o FDOut.o FDRo.o FDRw.o FDTable.o pcb.o ptable.o stable.o Lock.o SCHandle.o 
 
 VM_H = 
 VM_C = 

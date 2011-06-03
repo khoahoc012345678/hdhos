@@ -39,7 +39,9 @@ INCDIR =-I../userprog -I../threads
 CFLAGS = -G 0 -c $(INCDIR)
 
 
-all: halt shell matmult sort consoleA consoleB test createfile
+all: halt shell matmult sort consoleA consoleB test createfile \
+	main lower middle higher highest\
+	ping pong scheduler1\
 
 start.o: start.s ../userprog/syscall.h
 	$(CPP) $(CPPFLAGS) start.c > strt.s
@@ -92,4 +94,49 @@ test.o: test.c
 	$(CC) $(CFLAGS) -c test.c
 test: test.o start.o
 	$(LD) $(LDFLAGS) start.o test.o -o test.coff
-	../bin/coff2noff test.coff test
+	../bin/coff2noff test.coff test\
+
+main.o: main.c
+	$(CC) $(CFLAGS) -c main.c
+main: main.o start.o
+	$(LD) $(LDFLAGS) start.o main.o -o main.coff
+	../bin/coff2noff main.coff main
+lower.o: lower.c
+	$(CC) $(CFLAGS) -c lower.c
+lower: lower.o start.o
+	$(LD) $(LDFLAGS) start.o lower.o -o lower.coff
+	../bin/coff2noff lower.coff lower
+middle.o: middle.c
+	$(CC) $(CFLAGS) -c middle.c
+middle: middle.o start.o
+	$(LD) $(LDFLAGS) start.o middle.o -o middle.coff
+	../bin/coff2noff middle.coff middle
+higher.o: higher.c
+	$(CC) $(CFLAGS) -c higher.c
+higher: higher.o start.o
+	$(LD) $(LDFLAGS) start.o higher.o -o higher.coff
+	../bin/coff2noff higher.coff higher
+highest.o: highest.c
+	$(CC) $(CFLAGS) -c highest.c
+highest: highest.o start.o
+	$(LD) $(LDFLAGS) start.o highest.o -o highest.coff
+	../bin/coff2noff highest.coff highest
+
+ping.o: ping.c
+	$(CC) $(CFLAGS) -c ping.c
+ping: ping.o start.o
+	$(LD) $(LDFLAGS) start.o ping.o -o ping.coff
+	../bin/coff2noff ping.coff ping
+
+pong.o: pong.c
+	$(CC) $(CFLAGS) -c pong.c
+pong: pong.o start.o
+	$(LD) $(LDFLAGS) start.o pong.o -o pong.coff
+	../bin/coff2noff pong.coff pong
+
+scheduler1.o: scheduler1.c
+	$(CC) $(CFLAGS) -c scheduler1.c
+scheduler1: scheduler1.o start.o
+	$(LD) $(LDFLAGS) start.o scheduler1.o -o scheduler1.coff
+	../bin/coff2noff scheduler1.coff scheduler1
+

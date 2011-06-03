@@ -29,7 +29,8 @@
 
 Scheduler::Scheduler()
 { 
-    readyList = new List; 
+	//NOTE:List
+    readyList = new MyList; 
 } 
 
 //----------------------------------------------------------------------
@@ -56,6 +57,7 @@ Scheduler::ReadyToRun (Thread *thread)
     DEBUG('t', "Putting thread %s on ready list.\n", thread->getName());
 
     thread->setStatus(READY);
+    thread->time = stats->totalTicks;
     readyList->Append((void *)thread);
 }
 
@@ -70,7 +72,7 @@ Scheduler::ReadyToRun (Thread *thread)
 Thread *
 Scheduler::FindNextToRun ()
 {
-    return (Thread *)readyList->Remove();
+   return (Thread *)readyList->Remove();
 }
 
 //----------------------------------------------------------------------

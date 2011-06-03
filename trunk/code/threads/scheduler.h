@@ -10,7 +10,8 @@
 #define SCHEDULER_H
 
 #include "copyright.h"
-#include "list.h"
+//NOTE:list
+#include "MyList.h"
 #include "thread.h"
 
 // The following class defines the scheduler/dispatcher abstraction -- 
@@ -29,7 +30,8 @@ class Scheduler {
     void Print();			// Print contents of ready list
     
   private:
-    List *readyList;  		// queue of threads that are ready to run,
+	  //NOTE:List
+    MyList *readyList;  		// queue of threads that are ready to run,
 				// but not running
 };
 

@@ -85,7 +85,8 @@ class Thread {
    //NOTE:
    FDTable *fTab;
    int processID;
-   int exitStatus;
+	int priority;
+	int time;
    void FreeSpace()
    {
 	   delete space;

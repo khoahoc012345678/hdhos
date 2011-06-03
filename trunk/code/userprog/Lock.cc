@@ -1,8 +1,8 @@
 #include "Lock.h"
 
 LockTable::LockTable() {
-	for (int i = 0; i< 10; i++)
-		ltab[i] = new Lock ("ltab34343");
+// 	for (int i = 0; i< 10; i++)
+// 		ltab[i] = NULL;
 	bm  = new BitMap (10);
 } 
 LockTable:: ~LockTable() {
@@ -29,14 +29,14 @@ int LockTable::MakeLock(char* dbgName) {
 				return -1;
 			}
 	}
-	ltab[i]->setName (dbgName);	
+	this->ltab[i] = new Lock (dbgName);	
 	return 0;
 }
 int LockTable::Aquire (char* dbgName) {
 	int i,slot;
 	for (i = 0; i<10; i++)
 	{
-		if (ltab[i]!=NULL)
+		if (this->ltab[i]!=NULL)
 			if (strcmp(ltab[i]->getName(),dbgName) == 0){
 				slot = i;
 				break;
@@ -47,7 +47,7 @@ int LockTable::Aquire (char* dbgName) {
 		printf("\nsai ten hoac lock chua duoc tao");
 		return -1;
 	}
-	ltab[i]->Acquire();
+	this->ltab[i]->Acquire();
 	return 0;
 }
 int LockTable::Release(char* dbgName){
@@ -65,6 +65,6 @@ int LockTable::Release(char* dbgName){
 		printf("\nsai ten hoac lock chua duoc tao");
 		return -1;
 	}
-	ltab[i]->Release();
+	this->ltab[i]->Release();
 	return 0;
 }

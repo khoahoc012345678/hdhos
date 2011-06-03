@@ -102,7 +102,7 @@ Semaphore::V()
 // the test case in the network assignment won't work!
 Lock::Lock(char* debugName) {
 	name = debugName;
-	lock = new Semaphore("lock",1);
+	lock = new Semaphore(debugName,1);
 }
 Lock::~Lock() {
 	delete lock;
