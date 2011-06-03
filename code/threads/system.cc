@@ -24,6 +24,7 @@ Lock	*addrLock;
 BitMap	*bmTab;
 PTable	*processTab; 
 LockTable *lockTab;
+STable* semTab;
 //END
 #ifdef FILESYS_NEEDED
 FileSystem  *fileSystem;
@@ -161,6 +162,7 @@ Initialize(int argc, char **argv)
 	bmTab = new BitMap (256);    
 	processTab = new PTable (10);
 	lockTab = new LockTable ();
+	semTab = new STable();
 	#endif
 	
 	#ifdef FILESYS
@@ -196,8 +198,9 @@ Cleanup()
 		delete addrLock;
 	if (processTab!= NULL)
 		delete processTab;
-	if (lockTab!= NULL)
-		delete lockTab;
+// 	if (lockTab!= NULL)
+// 		delete lockTab;
+		//delete semTab;
 	#endif
 		
 		#ifdef FILESYS_NEEDED

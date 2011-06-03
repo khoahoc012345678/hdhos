@@ -68,9 +68,7 @@ class Lock {
     Lock(char* debugName);  		// initialize lock to be FREE
     ~Lock();				// deallocate lock
     char* getName() { return name; }	// debugging assist
-    //NOTE:
-    void setName (char* _in_name) {name = _in_name;}
-    //
+    
     void Acquire(); // these are the only operations on a lock
     void Release(); // they are both *atomic*
 
@@ -78,9 +76,9 @@ class Lock {
 					// holds this lock.  Useful for
 					// checking in Release, and in
 					// Condition variable ops below.
-
-  private:
     char* name;				// for debugging
+  private:
+    
     // plus some other stuff you'll need to define
     Thread	 *owner;	//remember who aquired the lock
     Semaphore	 *lock;		//use semaphore for the actual lock

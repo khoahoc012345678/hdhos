@@ -21,7 +21,7 @@ int
 main()
 {
     int i, j, k;
-
+    Write("\nmatmult: Intended to stress virtual memory system. ",50,ConsoleOutput);
     for (i = 0; i < Dim; i++)		/* first initialize the matrices */
 	for (j = 0; j < Dim; j++) {
 	     A[i][j] = i;
@@ -33,6 +33,6 @@ main()
 	for (j = 0; j < Dim; j++)
             for (k = 0; k < Dim; k++)
 		 C[i][j] += A[i][k] * B[k][j];
-
-    Exit(C[Dim-1][Dim-1]);		/* and then we're done */
+	    Write("\nKet thuc chuong trinh matmult",50,ConsoleOutput);	   
+    //Exit(C[Dim-1][Dim-1]);		/* and then we're done */
 }

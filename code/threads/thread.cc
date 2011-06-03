@@ -41,7 +41,7 @@ Thread::Thread(char* threadName)
     //NOTE:
     fTab = new FDTable();
     processID = 0;
-    exitStatus = 0;
+    priority = 0;
     //
 #ifdef USER_PROGRAM
     space = NULL;

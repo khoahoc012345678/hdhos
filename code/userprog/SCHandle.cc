@@ -171,7 +171,7 @@ int doSC_CreateLock()
 		machine->WriteRegister(2,-1);
 		return -1;
 	}
-	int kq = lockTab->MakeLock(name);
+	int kq = semTab->Create(name,1);
 	if (kq == -1)
 	{
 		printf ("\nFail to create lock name %s", name);
@@ -195,7 +195,7 @@ int doSC_Acquire()
 		machine->WriteRegister(2,-1);
 		return -1;
 	}
-	int kq = lockTab->Aquire(name);
+	int kq = semTab->Wait(name);
 	if (kq == -1)
 	{
 		printf ("\nFail to create lock name %s", name);
@@ -220,7 +220,7 @@ int doSC_Release()
 		machine->WriteRegister(2,-1);
 		return -1;
 	}
-	int kq = lockTab->Release(name);
+	int kq = semTab->Signal(name);
 	if (kq == -1)
 	{
 		printf ("\nFail to create lock name %s", name);

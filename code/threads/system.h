@@ -33,6 +33,7 @@ extern Timer *timer;				// the hardware alarm clock
 #include "synch.h"
 #include "ptable.h"
 #include "Lock.h"
+#include "stable.h"
 #include "bitmap.h"
 //NOTE:ADD
 extern SynchConsole *gSynchConsole;
@@ -40,6 +41,7 @@ extern Lock 	*addrLock;
 extern BitMap	*bmTab;
 extern PTable	*processTab; 
 extern LockTable *lockTab;
+extern STable* semTab;
 //END
 #ifdef USER_PROGRAM
 #include "machine.h"
